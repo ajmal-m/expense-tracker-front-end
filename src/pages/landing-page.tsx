@@ -1,5 +1,6 @@
 import { memo } from "react";
 import Logo from '../../public/Logo.svg';
+import { Link } from "react-router-dom";
 
 const LandingPage = memo(() => {
     return(
@@ -26,14 +27,18 @@ const LandingPage = memo(() => {
                         rounded-[50px] w-[124px] h-[45px] font-semibold 
                         text-[16px] font-inter
                     ">
-                        SIGNUP
+                        <Link to={'/sign-up'}>
+                            SIGNUP
+                        </Link>
                     </button>
                     <button className="
                         cursor-pointer border border-[#2563EB] bg-[#FFFFFF] text-[#2563EB] 
                         rounded-[50px] w-[106px] h-[45px] font-semibold 
                         text-[16px] font-inter
                     ">
-                        LOGIN
+                        <Link to={'/login'}>
+                            LOGIN
+                        </Link>
                     </button>
                 </div>
             </div>

@@ -1,9 +1,16 @@
+import {Route, Routes} from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-import LandingPage from "./pages/landing-page"
+const LandingPage = lazy(() => import('./pages/landing-page'));
+
 function App() {
   return (
     <>
-      <LandingPage/>
+      <Routes>
+        <Route path='/' element={<Suspense fallback={<>Loading...</>}><LandingPage/></Suspense>}/>
+        <Route path='/login' element={<>LoginPage</>}/>
+        <Route path='/sign-up' element={<>SignUpPage</>}/>
+      </Routes>
     </>
   )
 }
