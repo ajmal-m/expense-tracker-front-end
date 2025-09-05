@@ -80,7 +80,7 @@ const LoginPage = memo(() => {
                     <div className="mt-[24px]">
                         <button
                             className="
-                            w-[433px] h-[38px] bg-[#2563EB] rounded-[8px] 
+                            w-[350px] sm:w-[433px] h-[38px] bg-[#2563EB] rounded-[8px] 
                             flex items-center justify-center text-[#FFFFFF]
                             text-[16px] font-bold font-inter cursor-pointer
                             "
@@ -97,7 +97,7 @@ const LoginPage = memo(() => {
                     <div className="mt-[12px]">
                         <button
                             className="
-                                w-[433px] h-[38px] flex justify-center
+                                w-[350px] sm:w-[433px] h-[38px] flex justify-center
                                 items-center gap-[6px]
                                 border-[2px] border-[#2563EB] rounded-[8px]
                                 cursor-pointer
