@@ -19,11 +19,14 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         localStorage.setItem("expense-tracker-token", action.payload.token);
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
+
     },
     logout: (state) => {
         state.user = null;
         state.token = null;
         localStorage.removeItem("expense-tracker-token");
+        localStorage.removeItem("user");
     },
   },
 });
