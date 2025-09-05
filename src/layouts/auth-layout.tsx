@@ -4,7 +4,7 @@ import loginImage from '../assets/loginImage.svg';
 const AuthLayout = memo( ({ children }: { children : ReactNode}) => {
     return(
         <>
-        <div className="w-full flex items-center justify-center gap-[143px]">
+        <div className="w-full flex items-center justify-center gap-[143px] px-[12px]">
             <img src={loginImage} alt="login-image" className="w-[606px] h-[606px] hidden xl:block"/>
             {children}
         </div>
