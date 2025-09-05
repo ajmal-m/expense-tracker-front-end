@@ -12,6 +12,7 @@ function App() {
         <Route path='/' element={<Suspense fallback={<>Loading...</>}><LandingPage/></Suspense>}/>
         <Route path='/login' element={<Suspense fallback={<>Loading...</>}><LoginPage/></Suspense>}/>
         <Route path='/sign-up' element={<Suspense fallback={<>Loading...</>}><SignUpPage/></Suspense>}/>
+        <Route path='/dashboard' element={<Suspense fallback={<>Loading...</>}><>Dashboard</></Suspense>}/>
       </Routes>
     </>
   )

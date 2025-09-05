@@ -5,8 +5,19 @@ import GoogleIcon from '../assets/google_icon.svg';
 import Input from "../components/reusable/input";
 import Label from "../components/reusable/label";
 import { Link } from "react-router-dom";
+import axiosInstance from '../api/axios';
+import { loginSuccess } from "../slices/authSlice";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../store/store";
+import Loader from "../components/reusable/loader";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = memo(() => {
+
+    const dispatch = useDispatch<AppDispatch>();
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    
     const [signUpData, useSignUpData] = useState({
         name:"",
         email:"",
@@ -19,10 +30,20 @@ const SignUpPage = memo(() => {
     }, [signUpData]);
 
 
-    const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = useCallback( async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(signUpData)
-    }, [signUpData])
+        try {
+            setLoading(true);
+            const {data} = await axiosInstance.post('/auth/register', { name: signUpData.name, email : signUpData.email, password: signUpData.password});
+            dispatch(loginSuccess(data));
+            navigate('/dashboard');
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+        
+    }, [signUpData, loading])
     return(
         <>
          <AuthLayout>
@@ -87,7 +108,9 @@ const SignUpPage = memo(() => {
                             "
                             type="submit"
                         >
-                            CREATE ACCOUNT
+                            {
+                                loading ? <Loader/> : "CREATE ACCOUNT"
+                            }
                         </button>
                     </div>
                     <div className="flex items-center justify-center mt-[12px]">
