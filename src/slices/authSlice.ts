@@ -28,9 +28,10 @@ const authSlice = createSlice({
         localStorage.removeItem("expense-tracker-token");
         localStorage.removeItem("user");
     },
-    updateUser: (state, action: PayloadAction<{ user: any }>) => {
-        state.user = action.payload.user;
-        localStorage.setItem("user", JSON.stringify(action.payload.user));
+    updateUser: (state, action: PayloadAction<{ name: string, email:string, _id:string }>) => {
+        const { name, email, _id } = action.payload;
+        state.user = { name, email, id: _id };
+        localStorage.setItem("user", JSON.stringify(state.user));
     }
   }
 });
