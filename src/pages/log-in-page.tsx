@@ -10,6 +10,7 @@ import axiosInstance from "../api/axios";
 import { loginSuccess } from "../slices/authSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { GoogleLogin } from "@react-oauth/google";
 
 
 const LoginPage = memo(() => {
@@ -96,23 +97,36 @@ const LoginPage = memo(() => {
                         </span>
                     </div>
                     <div className="mt-[12px]">
-                        <button
-                            className="
-                                w-[350px] sm:w-[433px] h-[38px] flex justify-center
-                                items-center gap-[6px]
-                                border-[2px] border-[#2563EB] rounded-[8px]
-                                cursor-pointer
-                            "
-                            type="button"
-                        >
-                            <img src={GoogleIcon} alt="google-icon" />
-                            <p
-                                className="
-                                    text-[16px] font-bold font-inter
-                                    text-[#2563EB] tracking-[0%]
-                                "
-                            >Continue with Google</p>
-                        </button>
+                        <GoogleLogin
+                            onSuccess={(credentialResponse) => {
+                                if (credentialResponse.credential) {
+                                    console.log(credentialResponse)
+                                }
+                            }}
+                            onError={() => {
+                                console.log("Login Failed");
+                            }} 
+                            render={(renderProps : any) => (
+                                <button
+                                    onClick={() => renderProps.onClick?.()}
+                                    className="
+                                        w-[350px] sm:w-[433px] h-[38px] flex justify-center
+                                        items-center gap-[6px]
+                                        border-[2px] border-[#2563EB] rounded-[8px]
+                                        cursor-pointer
+                                    "
+                                    type="button"
+                                >
+                                    <img src={GoogleIcon} alt="google-icon" />
+                                    <p
+                                        className="
+                                            text-[16px] font-bold font-inter
+                                            text-[#2563EB] tracking-[0%]
+                                        "
+                                    >Continue with Google</p>
+                                </button>
+                            )}
+                        />
                     </div>
                     <div className="mt-[12px]">
                         <p
