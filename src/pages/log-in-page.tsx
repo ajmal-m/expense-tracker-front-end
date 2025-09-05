@@ -4,10 +4,19 @@ import Label from "../components/reusable/label";
 import Input from "../components/reusable/input";
 import LogoImage from '../assets/LogoSmall.svg';
 import GoogleIcon from '../assets/google_icon.svg';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "../components/reusable/loader";
+import axiosInstance from "../api/axios";
+import { loginSuccess } from "../slices/authSlice";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 
 const LoginPage = memo(() => {
+
+    const [loader, useLoader] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [logInData, setLogInData] = useState({
         email:"",
         password:""
@@ -17,10 +26,22 @@ const LoginPage = memo(() => {
         setLogInData((data) => ({ ...data, [name]: value}));
     }, [logInData]);
 
-    const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log(logInData)
-    }, [logInData])
+    const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+       try {
+            useLoader(true);
+            e.preventDefault();
+            const {data} = await axiosInstance.post('/auth/login', { email : logInData.email, password: logInData.password});
+            dispatch(loginSuccess(data));
+            toast.success("Logged successfully.")
+            navigate('/dashboard');
+            useLoader(false);
+       } catch (error: any) {
+            useLoader(false);
+            console.log(error);
+            const errorMessage = error?.response?.data?.message;
+            toast.error(errorMessage);
+       }
+    }, [logInData,loader])
 
     return(
         <>
@@ -64,7 +85,9 @@ const LoginPage = memo(() => {
                             "
                             type="submit"
                         >
-                            LOGIN
+                            {
+                                loader ? <Loader/> :"LOGIN"
+                            }
                         </button>
                     </div>
                     <div className="flex items-center justify-center mt-[12px]">
