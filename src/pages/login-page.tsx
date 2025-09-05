@@ -3,6 +3,7 @@ import AuthLayout from "../layouts/auth-layout";
 import LogoImage from '../assets/LogoSmall.svg';
 import GoogleIcon from '../assets/google_icon.svg';
 import Input from "../components/reusable/input";
+import Label from "../components/reusable/label";
 
 const LoginPage = memo(() => {
     const [signUpData, useSignUpData] = useState({
@@ -29,7 +30,10 @@ const LoginPage = memo(() => {
                 <h2 className="text-[24px] font-inter text-[#000000] font-[400] mt-[24px]">Join FinSight Today</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-[6px] mt-[24px]">
-                        <label htmlFor="" className="text-[12px] text-[#111827] font-inter font-[400]">Name</label>
+                        <Label
+                            name="name"
+                            label="Name"
+                        />
                         <Input
                             type="text"
                             name="name"
@@ -38,7 +42,10 @@ const LoginPage = memo(() => {
                         />
                     </div>
                     <div className="flex flex-col gap-[6px] mt-[24px]">
-                        <label htmlFor="" className="text-[12px] text-[#111827] font-inter font-[400]">Email Address</label>
+                        <Label
+                            name="email"
+                            label="Email Address"
+                        />
                         <Input
                             type="email"
                             name="email"
@@ -47,7 +54,10 @@ const LoginPage = memo(() => {
                         />
                     </div>
                     <div className="flex flex-col gap-[6px] mt-[24px]">
-                        <label htmlFor="" className="text-[12px] text-[#111827] font-inter font-[400]">Password</label>
+                        <Label
+                            name="password"
+                            label="Password"
+                        />
                          <Input
                             type="password"
                             name="password"
@@ -56,7 +66,10 @@ const LoginPage = memo(() => {
                         />
                     </div>
                     <div className="flex flex-col gap-[6px] mt-[24px]">
-                        <label htmlFor="" className="text-[12px] text-[#111827] font-inter font-[400]">Confirm Password</label>
+                        <Label
+                            name="confirmPassword"
+                            label="Confirm Password"
+                        />
                          <Input
                             type="password"
                             name="confirmPassword"
