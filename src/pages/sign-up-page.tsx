@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../store/store";
 import Loader from "../components/reusable/loader";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SignUpPage = memo(() => {
 
@@ -38,8 +39,10 @@ const SignUpPage = memo(() => {
             dispatch(loginSuccess(data));
             navigate('/dashboard');
             setLoading(false);
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
+            const errorMessage = error?.response?.data?.message;
+            toast.error(errorMessage);
             setLoading(false);
         }
         

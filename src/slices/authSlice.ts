@@ -17,12 +17,10 @@ const authSlice = createSlice({
     loginSuccess: (state, action: PayloadAction<{ user: any; token: string }>) => {
         console.log(action.payload);
         state.user = action.payload.user;
-        state.token = action.payload.token;
         localStorage.setItem("expense-tracker-token", action.payload.token);
     },
     logout: (state) => {
         state.user = null;
-        state.token = null;
         localStorage.removeItem("expense-tracker-token");
     },
   },
