@@ -1,47 +1,36 @@
 import { memo, useCallback, useState } from "react";
 import AuthLayout from "../layouts/auth-layout";
+import Label from "../components/reusable/label";
+import Input from "../components/reusable/input";
 import LogoImage from '../assets/LogoSmall.svg';
 import GoogleIcon from '../assets/google_icon.svg';
-import Input from "../components/reusable/input";
-import Label from "../components/reusable/label";
 import { Link } from "react-router-dom";
 
-const SignUpPage = memo(() => {
-    const [signUpData, useSignUpData] = useState({
-        name:"",
+
+const LoginPage = memo(() => {
+    const [logInData, setLogInData] = useState({
         email:"",
-        password:"",
-        confirmPassword:""
+        password:""
     });
 
-    const updatevalue =  useCallback((name : string, value : string | number) => {
-        useSignUpData((data) => ({ ...data, [name]: value}) )
-    }, [signUpData]);
-
+    const updatevalue = useCallback((name: string, value: string | number) => {
+        setLogInData((data) => ({ ...data, [name]: value}));
+    }, [logInData]);
 
     const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(signUpData)
-    }, [signUpData])
+        console.log(logInData)
+    }, [logInData])
+
     return(
         <>
-         <AuthLayout>
-            <div className="flex flex-col items-center">
+            <AuthLayout>
+                <div className="flex flex-col items-center">
                 <img src={LogoImage} alt="logo" className="w-[100px] h-[100px]"/>
-                <h2 className="text-[24px] font-inter text-[#000000] font-[400] mt-[24px]">Join FinSight Today</h2>
+                <h2 className="text-[24px] font-inter text-[#000000] font-[400] mt-[24px]">
+                    Welcome back to FinSight
+                </h2>
                 <form onSubmit={handleSubmit}>
-                    <div className="flex flex-col gap-[6px] mt-[24px]">
-                        <Label
-                            name="name"
-                            label="Name"
-                        />
-                        <Input
-                            type="text"
-                            name="name"
-                            value={signUpData.name}
-                            updateValue={updatevalue}
-                        />
-                    </div>
                     <div className="flex flex-col gap-[6px] mt-[24px]">
                         <Label
                             name="email"
@@ -50,7 +39,7 @@ const SignUpPage = memo(() => {
                         <Input
                             type="email"
                             name="email"
-                            value={signUpData.email}
+                            value={logInData.email}
                             updateValue={updatevalue}
                         />
                     </div>
@@ -62,19 +51,7 @@ const SignUpPage = memo(() => {
                          <Input
                             type="password"
                             name="password"
-                            value={signUpData.password}
-                            updateValue={updatevalue}
-                        />
-                    </div>
-                    <div className="flex flex-col gap-[6px] mt-[24px]">
-                        <Label
-                            name="confirmPassword"
-                            label="Confirm Password"
-                        />
-                         <Input
-                            type="password"
-                            name="confirmPassword"
-                            value={signUpData.confirmPassword}
+                            value={logInData.password}
                             updateValue={updatevalue}
                         />
                     </div>
@@ -87,7 +64,7 @@ const SignUpPage = memo(() => {
                             "
                             type="submit"
                         >
-                            CREATE ACCOUNT
+                            LOGIN
                         </button>
                     </div>
                     <div className="flex items-center justify-center mt-[12px]">
@@ -121,9 +98,9 @@ const SignUpPage = memo(() => {
 
                             "
                         >
-                            Already have an account? <span className="text-[#2563EB] underline">
-                                <Link to={'/login'} >
-                                    Login
+                            New to FinSight? <span className="text-[#2563EB] underline">
+                                <Link to={'/sign-up'}>
+                                    Signup
                                 </Link>
                             </span>
                         </p>
@@ -133,9 +110,9 @@ const SignUpPage = memo(() => {
                     </div>
                 </form>
             </div>
-         </AuthLayout>
+            </AuthLayout>
         </>
     )
 });
 
-export default SignUpPage;
+export default LoginPage;
