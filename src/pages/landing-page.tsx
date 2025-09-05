@@ -22,24 +22,24 @@ const LandingPage = memo(() => {
                     Track expenses, set budgets, and get real-time financial advice — all in one place.
                 </p>
                 <div className="flex items-center gap-[8px] xs:gap-[32px] mt-[32px]">
-                    <button className="
-                        cursor-pointer bg-[#2563EB] text-[#FFFFFF] 
-                        rounded-[50px] w-[124px] h-[45px] font-semibold 
-                        text-[16px] font-inter
-                    ">
-                        <Link to={'/sign-up'}>
+                    <Link to={'/sign-up'}>
+                        <button className="
+                            cursor-pointer bg-[#2563EB] text-[#FFFFFF] 
+                            rounded-[50px] w-[124px] h-[45px] font-semibold 
+                            text-[16px] font-inter
+                        ">
                             SIGNUP
-                        </Link>
-                    </button>
-                    <button className="
-                        cursor-pointer border border-[#2563EB] bg-[#FFFFFF] text-[#2563EB] 
-                        rounded-[50px] w-[106px] h-[45px] font-semibold 
-                        text-[16px] font-inter
-                    ">
-                        <Link to={'/login'}>
+                        </button>
+                    </Link>
+                    <Link to={'/login'}>
+                        <button className="
+                            cursor-pointer border border-[#2563EB] bg-[#FFFFFF] text-[#2563EB] 
+                            rounded-[50px] w-[106px] h-[45px] font-semibold 
+                            text-[16px] font-inter
+                        ">
                             LOGIN
-                        </Link>
-                    </button>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </>

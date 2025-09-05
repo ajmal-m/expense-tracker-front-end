@@ -5,7 +5,7 @@ import GoogleIcon from '../assets/google_icon.svg';
 import Input from "../components/reusable/input";
 import Label from "../components/reusable/label";
 
-const LoginPage = memo(() => {
+const SignUpPage = memo(() => {
     const [signUpData, useSignUpData] = useState({
         name:"",
         email:"",
@@ -133,4 +133,4 @@ const LoginPage = memo(() => {
     )
 });
 
-export default LoginPage;
+export default SignUpPage;
