@@ -31,7 +31,9 @@ const RootLayout = memo(({ children }: { children : ReactNode}) => {
 
     return(
         <>
-            {children}
+            <div className="px-[120px]">
+                {children}
+            </div>
         </>
     )
 });

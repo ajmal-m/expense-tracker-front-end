@@ -1,20 +1,16 @@
 import { memo } from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
 import RootLayout from "../layouts/root-layout";
+import Navbar from "../components/dashboard/navbar";
+import AnalyticsBadges from "../components/dashboard/analytics-badges";
 
 
 const Dashboard = memo(() => {
-    const user = useSelector((store : RootState) => store.auth.user);
     return(
         <>
-        <RootLayout>
-             <div>
-                <h1>Dashboard</h1>
-                <h2>{user?.name}</h2>
-                <h3>{user?.email}</h3>
-            </div>
-        </RootLayout>
+            <RootLayout>
+                <Navbar/>
+                <AnalyticsBadges/>
+            </RootLayout>
         </>
     )
 });
