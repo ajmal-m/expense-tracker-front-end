@@ -5,6 +5,8 @@ import categoryIcon from '../../assets/category.svg';
 import notesIcon from '../../assets/notes.svg';
 import paymentIcon from '../../assets/payment.svg';
 import acuionIcon from '../../assets/action.svg';
+import EditIcon from '../../assets/edit.svg';
+import deleteIcon from '../../assets/delete.svg';
 
 const TransactionTable = memo( () => {
   return (
@@ -56,15 +58,27 @@ const TransactionTable = memo( () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-[#FFFFFF] dark:border-gray-700 border-gray-200">
-            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Aug 15, 2025</td>
-            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">₹2,500</td>
-            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Laptop</td>
-            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Groceries</td>
-            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Weekly supermarket run</td>
-            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">debit card</td>
-          </tr>
-          
+          {
+            [1,2,3].map((_, index) => (
+              <tr key={index} className="bg-white border-b dark:bg-[#FFFFFF] dark:border-gray-700 border-gray-200">
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Aug 15, 2025</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">₹2,500</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Groceries</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Weekly supermarket run</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">debit card</td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-2">
+                    <button>
+                      <img src={EditIcon} alt="edit-icon"/>
+                    </button>
+                    <button>
+                      <img src={deleteIcon} alt="delete-icon"/>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ) )
+          }
         </tbody>
       </table>
     </div>
