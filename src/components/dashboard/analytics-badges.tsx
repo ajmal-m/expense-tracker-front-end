@@ -3,6 +3,7 @@ import AnalyticsImage from '../../assets/analyticsImage.svg';
 import BadgeLayout from "../../layouts/badge-layout";
 import BudgetIcon from '../../assets/budgeticon.svg';
 import BudgetSummaryIcon from '../../assets/budget_summary_icon.svg';
+import ProgressBar from "../reusable/progress-bar";
 
 const AnalyticsBadges = memo(() => {
     return(
@@ -33,8 +34,8 @@ const AnalyticsBadges = memo(() => {
                             <p className="text-[#111827] text-[18px] font-[400] font-inter">Budget Remaining</p>
                             <p className="text-[#2563EB] text-[20px] font-semibold font-inter">₹7,700 left of ₹50,000</p>
                             <div className="flex items-center gap-[4px]">
-                                <div className="w-[40%] bg-[#ffffff96] rounded-full h-2.5 dark:bg-[#ffffffc3]">
-                                    <div className="bg-[#F8BD00] h-2.5 rounded-full" style={{width:'85%'}}></div>
+                                <div className="w-[100px]">
+                                    <ProgressBar width={85} color=""/>
                                 </div>
                                  <span className="text-[#6B7280]">15% remaining</span>
                             </div>
@@ -53,7 +54,7 @@ const AnalyticsBadges = memo(() => {
                     </div>
                 </BadgeLayout>
             </div>
-            <div className="flex items-center gap-[32px] mt-[24px]">
+            <div className="flex flex-wrap gap-[32px] mt-[24px]">
                 <BadgeLayout>
                     <div className="flex justify-between items-center w-[100%] px-[16px]">
                         <div className="flex flex-col gap-[6px]">
@@ -65,8 +66,70 @@ const AnalyticsBadges = memo(() => {
                     </div>
                 </BadgeLayout>
 
-                <div >
+                <div 
+                    className="
+                        w-[787px] h-[137px]  flex items-center
+                        rounded-[12px] bg-[#E5E7EB] 
+                        shadow-[1px_2px_6px_1px_rgba(0,0,0,1)]
+                        justify-between px-[16px]
+                    "
+                >
+                    <div className="flex flex-col gap-[6px]">
+                        <p className="text-[18px] font-[400] font-inter text-[#111827]">Monthly Budget</p>
+                        <h2 className="text-[20px] font-semibold font-inter text-[#2563EB]" >₹42,300 of ₹50,000 used</h2>
+                        <div className="flex items-center gap-[6px]">
+                            <div className="w-[70px]">
+                                <ProgressBar width={85} color="#F8BD00"/>
+                            </div>
+                            <p className="text-[#6B7280] text-[14px] font-medium font-inter">85% spent</p>
+                        </div>
+                    </div>
 
+                    <div className="flex items-center gap-[20px]">
+                        <div className="flex flex-col gap-[8px]">
+                            <div className="flex flex-col items-center justify-between gap-[4px]">
+                                <div className="flex items-center justify-between gap-1">
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Groceries</p>
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >83%</p>
+                                </div>
+                                <ProgressBar width={83} color="#F8BD00" />
+                                <p 
+                                    className="text-[12px] font-medium font-inter text-[#F59E0B]"
+                                >
+                                    ⚠️ 80% reaches
+                                </p>
+                            </div>
+                            <div className="flex flex-col items-center justify-between gap-[4px]">
+                                <div className="flex items-center justify-between gap-1">
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Transport</p>
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >70%</p>
+                                </div>
+                                <ProgressBar width={70} color="#F8BD00"/>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-[8px]">
+                            <div className="flex flex-col items-center justify-between gap-[4px]">
+                                <div className="flex items-center justify-between gap-1">
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Groceries</p>
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >83%</p>
+                                </div>
+                                <ProgressBar width={83}  color="#F8BD00" />
+                                <p 
+                                    className="text-[12px] font-medium font-inter text-[#F59E0B]"
+                                >
+                                    ⚠️ 80% reaches
+                                </p>
+                            </div>
+                            <div className="flex flex-col items-center justify-between gap-[4px]">
+                                <div className="flex items-center justify-between gap-1">
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Transport</p>
+                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >70%</p>
+                                </div>
+                                <ProgressBar width={70}  color="red"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
