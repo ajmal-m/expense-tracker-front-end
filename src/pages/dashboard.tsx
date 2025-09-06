@@ -4,6 +4,7 @@ import Navbar from "../components/dashboard/navbar";
 import AnalyticsBadges from "../components/dashboard/analytics-badges";
 import AnalyticsGraphs from "../components/dashboard/analytics-graphs";
 import RecentTransactions from "../components/dashboard/recent-transactions";
+import Footer from "../components/dashboard/footer";
 
 
 const Dashboard = memo(() => {
@@ -14,6 +15,7 @@ const Dashboard = memo(() => {
                 <AnalyticsBadges/>
                 <AnalyticsGraphs/>
                 <RecentTransactions/>
+                <Footer/>
             </RootLayout>
         </>
     )
