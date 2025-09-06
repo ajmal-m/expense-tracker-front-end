@@ -1,0 +1,74 @@
+import { memo } from "react";
+import DateIcon from '../../assets/date.svg';
+import amountIcon from '../../assets/amount.svg';
+import categoryIcon from '../../assets/category.svg';
+import notesIcon from '../../assets/notes.svg';
+import paymentIcon from '../../assets/payment.svg';
+import acuionIcon from '../../assets/action.svg';
+
+const TransactionTable = memo( () => {
+  return (
+    <div className="relative overflow-x-auto">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead 
+            className="
+                text-[20px] font-bold font-inter text-[#2563EB] 
+                uppercase bg-gray-50 dark:bg-[#E5E7EB] dark:text-[#2563EB]
+            "
+        >
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              <div className="flex items-center gap-2">
+                <img src={DateIcon} alt="date-icon" /> 
+                <span>DATE</span>
+              </div>
+            </th>
+            <th scope="col" className="px-6 py-3">
+              <div className="flex items-center gap-2">
+                <img src={amountIcon} alt="amount-icon"/> 
+                <span>AMOUNT</span>
+              </div>
+            </th>
+            <th scope="col" className="px-6 py-3">
+              <div className="flex items-center gap-2">
+                <img src={categoryIcon} alt="category-icon"/> 
+                <span>CATEGORY</span>
+              </div>
+            </th>
+            <th scope="col" className="px-6 py-3">
+              <div className="flex items-center gap-2">
+                <img src={notesIcon} alt="notes-icon"/>
+                <span>NOTES</span>
+              </div>
+            </th>
+             <th scope="col" className="px-6 py-3">
+              <div className="flex items-center gap-2">
+                <img src={paymentIcon} alt="payment-icon"/>
+                <span>PAYMENT</span>
+              </div>
+            </th>
+            <th scope="col" className="px-6 py-3">
+              <div className="flex items-center gap-2">
+                <img src={acuionIcon} alt="action-icon"/>
+                <span>ACTIONS</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="bg-white border-b dark:bg-[#FFFFFF] dark:border-gray-700 border-gray-200">
+            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Aug 15, 2025</td>
+            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">₹2,500</td>
+            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Laptop</td>
+            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Groceries</td>
+            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Weekly supermarket run</td>
+            <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">debit card</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  );
+});
+
+export default TransactionTable;
