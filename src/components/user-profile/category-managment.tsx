@@ -1,19 +1,22 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import cancelIcon from '../../assets/cancel-icon.svg';
 import { getCategories , addCategory, deleteCategory } from "../../api/category-services";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../store/store";
+import { setCategories, removeCategoryItem } from "../../slices/categorySlice";
 
 const CategoryManagment = memo(() => {
-    const [categories, setCategories] = useState<{ name: string; _id: string }[]>([]);
+    const categories = useSelector((store: RootState) => store.category.categoryies);
+    const dispatch = useDispatch<AppDispatch>();
     const [category, setCategory] = useState("");
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 const data = await getCategories();
-                setCategories(data);
+                dispatch(setCategories(data));
             } catch (error) {
                 console.log(error);
-                setCategories([]);
             }
         }
         fetchCategories();
@@ -24,7 +27,7 @@ const CategoryManagment = memo(() => {
             e.preventDefault();
             const data = await addCategory({ name : category});
             setCategory("")
-            setCategories(cat => ([...cat, data]))
+            dispatch(setCategories([data]));
         } catch (error) {
             console.log(error);
         }
@@ -34,7 +37,7 @@ const CategoryManagment = memo(() => {
     const removeCategory = useCallback(async (cat : { name: string; _id: string }) => {
         try {
             await  deleteCategory({ id : cat._id});
-            setCategories(cate => cate.filter(item => item._id != cat._id));
+            dispatch(removeCategoryItem(cat._id))
         } catch (error) {
             console.log(error);
         }
