@@ -6,6 +6,8 @@ import listIcon from '../../assets/list.svg';
 import analyticsIcon from '../../assets/analytics.png';
 import contactIcon from '../../assets/contact.png';
 import notificationIcon from '../../assets/notification.svg';
+import DefaultModal from "../reusable/expense-model";
+import AddExpenseModel from "../models/add-expenses";
 
 const Navbar = memo(() => {
     return(
@@ -20,9 +22,12 @@ const Navbar = memo(() => {
                 <button className="cursor-pointer">
                     <img src={HomeIcon} alt="home-icon"/>
                 </button>
-                <button className="cursor-pointer">
-                    <img src={AddIcon} alt="add-icon"/>
-                </button>
+                <DefaultModal 
+                    icon={AddIcon}
+                    model={(close) => (
+                        <AddExpenseModel close={close}/>
+                    )}
+                />
                 <button className="cursor-pointer">
                     <img src={listIcon} alt="list-icon"/>
                 </button>
