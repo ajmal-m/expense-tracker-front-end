@@ -5,6 +5,39 @@ import categoryIcon from '../../assets/category-add-expense.svg';
 import addDateIcon from '../../assets/date-add-expense.svg';
 
 
+const Label = memo(({ name , label} : { name:string; label:string;}) => {
+    return(
+        <label 
+            htmlFor={name} 
+            className="
+                text-[16px] font-bold 
+                font-inter text-[#6B7280]
+            "
+        >
+            {label}
+        </label>
+    )
+});
+
+const Button = memo((
+    { label , onClick , color }: { label: string , color : string; onClick?:() => void}) => {
+    return(
+        <button
+            type="button"
+            className="
+                w-[320px] h-[55px] rounded-[8px]
+                text-[#FFFFFF] font-bold
+                font-inter cursor-pointer
+            "
+            style={{ background: `${color}`}}
+            onClick={onClick}
+        >
+            {label}
+        </button>
+    )
+});
+
+
 const AddExpenseModel = memo(({ close }: { close : () => void }) => {
     return(
         <div
@@ -25,15 +58,7 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
             <form>
                 {/* Amount Input field */}
                 <div className="flex flex-col gap-1">
-                    <label 
-                        htmlFor="amount" 
-                        className="
-                            text-[16px] font-bold 
-                            font-inter text-[#6B7280]
-                        "
-                    >
-                        Amount
-                    </label>
+                    <Label name="amount" label="Amount"  />
                     <div className="relative">
                         <input 
                             type="text" name="amount" id="amount" 
@@ -49,15 +74,7 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
 
                 {/* category Input field */}
                 <div className="flex flex-col gap-1 mt-[36px]">
-                    <label 
-                        htmlFor="category" 
-                        className="
-                            text-[16px] font-bold 
-                            font-inter text-[#6B7280]
-                        "
-                    >
-                        Category
-                    </label>
+                    <Label name="category" label="Category"  />
                     <div className="relative">
                         <input 
                             type="text" name="amount" id="amount" 
@@ -74,15 +91,7 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
 
                 {/* Date Input filed */}
                 <div className="flex flex-col gap-1 mt-[36px]">
-                    <label 
-                        htmlFor="category" 
-                        className="
-                            text-[16px] font-bold 
-                            font-inter text-[#6B7280]
-                        "
-                    >
-                        Date
-                    </label>
+                    <Label name="date" label="Date"  />
                     <div className="relative">
                         <input 
                             type="date" name="date" id="date" 
@@ -98,15 +107,7 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
 
                 {/* Notes optional field */}
                 <div className="flex flex-col gap-1 mt-[36px]">
-                    <label 
-                        htmlFor="category" 
-                        className="
-                            text-[16px] font-bold 
-                            font-inter text-[#6B7280]
-                        "
-                    >
-                        Notes (optional)
-                    </label>
+                    <Label name="notes" label="Notes (optional)"  />
                     <textarea 
                         name="notes" id="notes"
                         className="w-[654px] h-[48px] rounded-[8px] border border-[#6B7280]
@@ -119,27 +120,8 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
 
                 {/* Button group */}
                 <div className="flex items-center gap-[14px] mt-[12px]">
-                    <button
-                        type="button"
-                        className="
-                            w-[320px] h-[55px] rounded-[8px]
-                            bg-[#2563EB] text-[#FFFFFF] font-bold
-                            font-inter cursor-pointer
-                        "
-                    >
-                        ADD
-                    </button>
-                    <button
-                        type="button"
-                        className="
-                            w-[320px] h-[55px] rounded-[8px]
-                            bg-[#FF0000] text-[#FFFFFF] font-bold
-                            font-inter cursor-pointer
-                        "
-                        onClick={close}
-                    >
-                        CANCEL
-                    </button>
+                    <Button label="ADD" color="#2563EB"/>
+                    <Button label="CANCEL" color="#FF0000" onClick={close}/>
                 </div>
             </form>
         </div>
