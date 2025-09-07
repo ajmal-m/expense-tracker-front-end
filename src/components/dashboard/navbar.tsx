@@ -17,25 +17,25 @@ const Navbar = memo(() => {
             </div>
 
             <div className="flex items-center gap-[40px]">
-                <button>
+                <button className="cursor-pointer">
                     <img src={HomeIcon} alt="home-icon"/>
                 </button>
-                <button>
+                <button className="cursor-pointer">
                     <img src={AddIcon} alt="add-icon"/>
                 </button>
-                <button>
+                <button className="cursor-pointer">
                     <img src={listIcon} alt="list-icon"/>
                 </button>
-                 <button>
+                 <button className="cursor-pointer">
                     <img src={analyticsIcon} alt="analytics-icon"/>
                 </button>
             </div>
 
             <div className="flex items-center gap-[24px]">
-                <button>
+                <button className="cursor-pointer"> 
                     <img src={notificationIcon} alt="notification-icon"/>
                 </button>
-                <button>
+                <button className="cursor-pointer">
                     <img src={contactIcon} alt="contact-icon"/>
                 </button>
             </div>
