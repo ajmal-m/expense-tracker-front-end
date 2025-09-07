@@ -6,7 +6,7 @@ import listIcon from '../../assets/list.svg';
 import analyticsIcon from '../../assets/analytics.png';
 import contactIcon from '../../assets/contact.png';
 import notificationIcon from '../../assets/notification.svg';
-import DefaultModal from "../reusable/expense-model";
+import DefaultModal from "../reusable/model";
 import AddExpenseModel from "../models/add-expenses";
 
 const Navbar = memo(() => {
