@@ -5,6 +5,7 @@ const LandingPage = lazy(() => import('./pages/landing-page'));
 const SignUpPage = lazy(() => import('./pages/sign-up-page'));
 const LoginPage = lazy(() => import('./pages/log-in-page'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
+const UserProfilePage = lazy(() => import('./pages/user-profile-page'));
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/login' element={<Suspense fallback={<>Loading...</>}><LoginPage/></Suspense>}/>
         <Route path='/sign-up' element={<Suspense fallback={<>Loading...</>}><SignUpPage/></Suspense>}/>
         <Route path='/dashboard' element={<Suspense fallback={<>Loading...</>}><Dashboard/></Suspense>}/>
+        <Route path='/user-profile' element={<Suspense fallback={<>Loading...</>}><UserProfilePage/></Suspense>}/>
       </Routes>
     </>
   )
