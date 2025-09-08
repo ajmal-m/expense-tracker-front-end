@@ -3,7 +3,7 @@ import cancelIcon from '../../assets/cancel-icon.svg';
 import { getCategories , addCategory, deleteCategory } from "../../api/category-services";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
-import { setCategories, removeCategoryItem } from "../../slices/categorySlice";
+import { setAllCategories, setSingleCategory, removeCategoryItem } from "../../slices/categorySlice";
 
 const CategoryManagment = memo(() => {
     const categories = useSelector((store: RootState) => store.category.categoryies);
@@ -14,7 +14,7 @@ const CategoryManagment = memo(() => {
         const fetchCategories = async () => {
             try {
                 const data = await getCategories();
-                dispatch(setCategories(data));
+                dispatch(setAllCategories(data));
             } catch (error) {
                 console.log(error);
             }
@@ -27,7 +27,7 @@ const CategoryManagment = memo(() => {
             e.preventDefault();
             const data = await addCategory({ name : category});
             setCategory("")
-            dispatch(setCategories([data]));
+            dispatch(setSingleCategory(data));
         } catch (error) {
             console.log(error);
         }
