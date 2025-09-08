@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {
-  user: null | { id: string; name: string; email: string };
+  user: null | { id: string; name: string; email: string; currency?: string };
   token: string | null;
 }
 
@@ -28,9 +28,9 @@ const authSlice = createSlice({
         localStorage.removeItem("expense-tracker-token");
         localStorage.removeItem("user");
     },
-    updateUser: (state, action: PayloadAction<{ name: string, email:string, _id:string }>) => {
-        const { name, email, _id } = action.payload;
-        state.user = { name, email, id: _id };
+    updateUser: (state, action: PayloadAction<{ name: string, email:string, _id:string, currency?: string }>) => {
+        const { name, email, _id , currency } = action.payload;
+        state.user = { id: _id, name, email , currency: currency || ""};
         localStorage.setItem("user", JSON.stringify(state.user));
     }
   }

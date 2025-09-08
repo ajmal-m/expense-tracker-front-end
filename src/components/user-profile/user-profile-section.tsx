@@ -1,7 +1,7 @@
 import { memo } from "react";
 import emailIcon from '../../assets/email-icon.svg';
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../store/store";
 import { logout } from "../../slices/authSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const UserProfileSection = memo(() => {
 
     const dispatch = useDispatch<AppDispatch>();
+    const user = useSelector((store : RootState) => store.auth.user);
     const navigate = useNavigate();
     const handleLogout = () => {
         dispatch(logout());
@@ -27,14 +28,18 @@ const UserProfileSection = memo(() => {
                 <div className="flex items-center gap-[16px]">
                     <img 
                     className="rounded-full w-[100px] h-[100px] object-cover"
-                    src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D" 
+                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
                     alt="user-profile" />
                     <div>
-                        <h3 className="text-[24px] font-semibold font-inter text-[#111827]">Jon Snow</h3>
+                        <h3 className="text-[24px] font-semibold font-inter text-[#111827]">
+                            {user?.name}
+                        </h3>
                         <div className="text-[20px] text-[#6B7280] font-inter font-[400]">
                             <div className="flex items-center gap-2">
                                 <img src={emailIcon} alt="email-icon"/>
-                                <span className="text-[20px] text-[#6B7280] font-[400] font-inter" >jonsnow@example.com</span>
+                                <span className="text-[20px] text-[#6B7280] font-[400] font-inter" >
+                                    {user?.email}
+                                </span>
                             </div>
                         </div>
                     </div>

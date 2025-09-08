@@ -2,28 +2,37 @@ import { memo, useCallback, useState } from "react";
 import contact from '../../assets/contact.svg';
 import emailIcon from '../../assets/email-icon.svg';
 import currencyIcon from '../../assets/currency-icon.svg';
-import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { type AppDispatch, type RootState } from "../../store/store";
 import currencies from '../../data/currencies.json';
+import { updateUserDetails } from "../../api/user-services";
+import { updateUser } from "../../slices/authSlice";
+import toast from "react-hot-toast";
 
 const PersonalDetailsUpdate = memo ( () => {
 
+    const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((store: RootState) =>  store.auth.user);
     const [userData, setUserData] = useState({
         name:user?.name || "",
-        currency:"",
+        currency: user?.currency,
         password:""
     });
 
     const updateUserData = useCallback( (e: { target: { name: any; value: any; }; }) => {
-        console.log(e.target.name, e.target.value)
         setUserData(data => ({ ...data, [e.target.name] : e.target.value}));
-    }, [userData]);
+    }, [userData, user]);
 
 
-    const handleSubmitUserData = useCallback((e: { preventDefault: () => void; } ) => {
+    const handleSubmitUserData = useCallback(async (e: { preventDefault: () => void; } ) => {
         e.preventDefault();
-        console.log(userData)
+        try {
+            const data = await updateUserDetails(userData);
+            toast.success("User updated successfully.");
+            dispatch(updateUser(data));
+        } catch (error) {
+            console.log(error);
+        }
     }, [userData])
     return(
         <div className="border-t border-[#111827] pt-[24px] mt-[24px]">
@@ -84,11 +93,12 @@ const PersonalDetailsUpdate = memo ( () => {
                                     className="w-[584px] h-[60px] border border-[#6B7280] rounded-[8px] pl-[40px]
                                         text-[20px] font-inter font-[400] text-[#6B7280]"
                                     onChange={updateUserData}
+                                    value={userData.currency}
                                 >
                                     <option value="">Select Currency</option>
                                     {
                                         currencies.map((curr, index) => (
-                                            <option value={curr.sign} key={index}>
+                                            <option value={curr.name} key={index}>
                                                 {curr.sign} - {curr.name}
                                             </option>
                                         ))
@@ -100,7 +110,7 @@ const PersonalDetailsUpdate = memo ( () => {
                 </div>
                 <div className="mt-[24px] flex justify-end">
                     <button className="w-[134px] h-[60px] bg-[#2563EB] rounded flex items-center justify-center
-                        text-[24px] font-bold font-inter text-[#FFFFFF]
+                        text-[24px] font-bold font-inter text-[#FFFFFF] cursor-pointer
                     "
                     >
                         Update
