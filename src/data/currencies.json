@@ -1,0 +1,22 @@
+[
+  { "name": "US Dollar", "sign": "$" },
+  { "name": "Euro", "sign": "€" },
+  { "name": "British Pound Sterling", "sign": "£" },
+  { "name": "Japanese Yen", "sign": "¥" },
+  { "name": "Chinese Yuan (Renminbi)", "sign": "¥" },
+  { "name": "Indian Rupee", "sign": "₹" },
+  { "name": "Swiss Franc", "sign": "CHF" },
+  { "name": "Canadian Dollar", "sign": "C$" },
+  { "name": "Australian Dollar", "sign": "A$" },
+  { "name": "Singapore Dollar", "sign": "S$" },
+  { "name": "Hong Kong Dollar", "sign": "HK$" },
+  { "name": "South Korean Won", "sign": "₩" },
+  { "name": "Russian Ruble", "sign": "₽" },
+  { "name": "Brazilian Real", "sign": "R$" },
+  { "name": "Mexican Peso", "sign": "Mex$" },
+  { "name": "Turkish Lira", "sign": "₺" },
+  { "name": "Saudi Riyal", "sign": "ر.س" },
+  { "name": "UAE Dirham", "sign": "د.إ" },
+  { "name": "South African Rand", "sign": "R" },
+  { "name": "New Zealand Dollar", "sign": "NZ$" }
+]

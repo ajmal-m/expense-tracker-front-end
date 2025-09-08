@@ -31,12 +31,12 @@ const UserProfileSection = memo(() => {
                     alt="user-profile" />
                     <div>
                         <h3 className="text-[24px] font-semibold font-inter text-[#111827]">Jon Snow</h3>
-                        <p className="text-[20px] text-[#6B7280] font-inter font-[400]">
+                        <div className="text-[20px] text-[#6B7280] font-inter font-[400]">
                             <div className="flex items-center gap-2">
                                 <img src={emailIcon} alt="email-icon"/>
                                 <span className="text-[20px] text-[#6B7280] font-[400] font-inter" >jonsnow@example.com</span>
                             </div>
-                        </p>
+                        </div>
                     </div>
                 </div>
                 <button
