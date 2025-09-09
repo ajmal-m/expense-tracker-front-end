@@ -2,19 +2,17 @@ import { memo, useState, type ReactNode } from "react";
 
 
 
-const  DefaultModal = memo( ({ icon, model } : { icon : string; model: (handleClose: () => void) => ReactNode } ) => {
+const  DefaultModal = memo( ({  model, trigger } : {  model: (handleClose: () => void) => ReactNode, trigger:  (handleClose: () => void) => ReactNode } ) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
+  const handleOpen = () => setIsOpen(true);
+
 
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        type="button"
-        className="cursor-pointer"
-      >
-        <img src={icon} alt="add-icon"/>
-      </button>
+      {
+        trigger(handleOpen)
+      }
 
       {isOpen && (
         <div

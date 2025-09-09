@@ -1,5 +1,7 @@
 import { memo } from "react";
 import RupeesIcon from '../../assets/rupees-icon.svg';
+import DefaultModal from "../reusable/model";
+import AddCategoryBudgetModal from "../models/add-category-budget";
 
 const BudgetSettings = memo(() => {
     return(
@@ -46,9 +48,15 @@ const BudgetSettings = memo(() => {
                         </tr>
                         </tbody>
                     </table>
-                    <button  className="p-[4px] bg-blue-600 text-white rounded font-inter font-bold cursor-pointer py-[10px]">
-                       Add New Category Budget
-                    </button>
+                    <DefaultModal 
+                        model={(close) => (
+                            <AddCategoryBudgetModal close={close} />
+                        )}
+                        trigger={(open) => (
+                            <button onClick={open} className="p-[4px] bg-blue-600 text-white rounded font-inter font-bold cursor-pointer py-[10px]">
+                                Add New Category Budget
+                            </button>
+                        )}                    />
                 </div>
                 {/* category Budget */}
 

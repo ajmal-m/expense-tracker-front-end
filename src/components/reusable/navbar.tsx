@@ -28,11 +28,14 @@ const Navbar = memo(() => {
                     <img src={HomeIcon} alt="home-icon"/>
                 </button>
                 <DefaultModal 
-                    icon={AddIcon}
-                    model={(close) => (
-                        <AddExpenseModel close={close}/>
-                    )}
-                />
+
+                        trigger={(open) => (
+                            <img src={AddIcon} className="cursor-pointer" onClick={open} />
+                        )}
+
+                        model={(close) => (
+                            <AddExpenseModel close={close} />
+                        )}                />
                 <button className="cursor-pointer">
                     <img src={listIcon} alt="list-icon"/>
                 </button>
