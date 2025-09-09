@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { useSelector } from "react-redux";
 import { type RootState } from "../../store/store";
+import Button from "../reusable/button";
 
 const AddCategoryBudgetModal = memo(({ close }: { close : () => void }) => {
       const categories = useSelector((store: RootState) => store.category.categoryies);
@@ -20,9 +21,20 @@ const AddCategoryBudgetModal = memo(({ close }: { close : () => void }) => {
                 }
             </select>
             <input type="text" name="amount" id="amount" />
-            <div className="flex justify-between items-center">
-                <button onClick={close}>Cancel</button>
-                <button>Submit</button>
+            <div className="flex justify-between items-center gap-2">
+                <Button
+                    label="Cancel"
+                    color="white"
+                    bgColor="#FF0000"
+                    onClick={close}
+                    width={150}
+                />
+                <Button
+                    label="Submit"
+                    color="white"
+                    bgColor="#2563EB"
+                    width={150}
+                />
             </div>
         </div>
     )
