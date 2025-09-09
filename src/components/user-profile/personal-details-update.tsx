@@ -8,6 +8,8 @@ import currencies from '../../data/currencies.json';
 import { updateUserDetails } from "../../api/user-services";
 import { updateUser } from "../../slices/authSlice";
 import toast from "react-hot-toast";
+import ImageInput from "../reusable/input-image";
+import Label from "../reusable/label";
 
 const PersonalDetailsUpdate = memo ( () => {
 
@@ -41,51 +43,63 @@ const PersonalDetailsUpdate = memo ( () => {
                 <div className="flex items-center gap-[32px]">
                     <div className="flex flex-col gap-[24px]">
                         <div className="flex flex-col gap-[12px]">
-                            <label htmlFor="name" className="text-[16px] font-bold font-inter text-[#6B7280]">Name</label>
-                            <div className="relative">
-                                <img src={contact} alt="contact-icon" className="absolute top-[19px] left-[15px]" />
-                                <input type="text" name="name" id="name"
-                                    className="w-[584px] h-[60px] border border-[#6B7280] rounded-[8px] pl-[40px]
-                                        text-[20px] font-inter font-[400] text-[#6B7280]
-                                    "
-                                    value={userData.name}
-                                    onChange={updateUserData}
-                                />
-                            </div>
+                            <Label
+                                name="name"
+                                size={16}
+                                weight={600}
+                                color="#6B7280"
+                                label="Name"
+                            />
+                            <ImageInput 
+                                image={contact}
+                                value={userData.name}
+                                handleChange={updateUserData}
+                                id="user-name"
+                            />
                         </div>
 
                          <div className="flex flex-col gap-[12px]">
-                            <label htmlFor="name" className="text-[16px] font-bold font-inter text-[#6B7280]">Password</label>
-                            <div className="relative">
-                                <img src={contact} alt="contact-icon" className="absolute top-[19px] left-[15px]" />
-                                <input type="password" name="password" id="password"
-                                    className="w-[584px] h-[60px] border border-[#6B7280] rounded-[8px] pl-[40px]
-                                        text-[20px] font-inter font-[400] text-[#6B7280]
-                                    "
-                                    value={userData.password}
-                                    onChange={updateUserData}
-                                />
-                            </div>
+                             <Label
+                                name="password"
+                                size={16}
+                                weight={600}
+                                color="#6B7280"
+                                label="Password"
+                            />
+                            <ImageInput 
+                                image={contact}
+                                value={userData.password}
+                                handleChange={updateUserData}
+                                id="user-password"
+                            />
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-[24px]">
                         <div className="flex flex-col gap-[12px]">
-                            <label htmlFor="name" className="text-[16px] font-bold font-inter text-[#6B7280]">Email</label>
-                            <div className="relative">
-                                <img src={emailIcon} alt="contact-icon" className="absolute top-[19px] left-[15px]" />
-                                <input type="text" name="name" id="name"
-                                    className="w-[584px] h-[60px] border border-[#6B7280] rounded-[8px] pl-[40px]
-                                        text-[20px] font-inter font-[400] text-[#6B7280]
-                                    "
-                                    value={user?.email}
-                                    disabled
-                                />
-                            </div>
+                             <Label
+                                name="email"
+                                size={16}
+                                weight={600}
+                                color="#6B7280"
+                                label="Email"
+                            />
+                             <ImageInput 
+                                image={emailIcon}
+                                value={user?.email || ""}
+                                id="user-email"
+                                disabled={true}
+                            />
                         </div>
 
                          <div className="flex flex-col gap-[12px]">
-                            <label htmlFor="currency" className="text-[16px] font-bold font-inter text-[#6B7280]">Currency</label>
+                             <Label
+                                name="currency"
+                                size={16}
+                                weight={600}
+                                color="#6B7280"
+                                label="Currency"
+                            />
                             <div className="relative">
                                 <img src={currencyIcon} alt="contact-icon" className="absolute top-[22px] left-[15px]" />
                                 <select 
