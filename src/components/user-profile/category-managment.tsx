@@ -4,6 +4,7 @@ import { getCategories , addCategory, deleteCategory } from "../../api/category-
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { setAllCategories, setSingleCategory, removeCategoryItem } from "../../slices/categorySlice";
+import MainHeading from "../reusable/heading";
 
 const CategoryManagment = memo(() => {
     const categories = useSelector((store: RootState) => store.category.categoryies);
@@ -47,7 +48,7 @@ const CategoryManagment = memo(() => {
 
     return(
         <div className="mt-[32px]">
-            <h3 className="text-[#111827] text-[24px] font-bold font-inter">Category Management</h3>
+            <MainHeading  label="Category Management"/>
             <div className="mt-[16px] flex gap-[12px] flex-wrap">
                 {
                    categories.length > 0 && categories.map((cat) => (

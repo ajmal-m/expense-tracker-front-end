@@ -10,6 +10,9 @@ import { updateUser } from "../../slices/authSlice";
 import toast from "react-hot-toast";
 import ImageInput from "../reusable/input-image";
 import Label from "../reusable/label";
+import Select from "../reusable/select";
+import Button from "../reusable/button";
+import MainHeading from "../reusable/heading";
 
 const PersonalDetailsUpdate = memo ( () => {
 
@@ -38,7 +41,7 @@ const PersonalDetailsUpdate = memo ( () => {
     }, [userData])
     return(
         <div className="border-t border-[#111827] pt-[24px] mt-[24px]">
-            <h2 className="text-[24px] text-[#111827] font-bold font-inter">Personal Details</h2>
+            <MainHeading label="Personal Details"/>
             <form className="mt-[16px]" onSubmit={handleSubmitUserData} >
                 <div className="flex items-center gap-[32px]">
                     <div className="flex flex-col gap-[24px]">
@@ -99,42 +102,30 @@ const PersonalDetailsUpdate = memo ( () => {
                         </div>
 
                          <div className="flex flex-col gap-[12px]">
-                             <Label
+                            <Label
                                 name="currency"
                                 size={16}
                                 weight={600}
                                 color="#6B7280"
                                 label="Currency"
                             />
-                            <div className="relative">
-                                <img src={currencyIcon} alt="contact-icon" className="absolute top-[22px] left-[15px]" />
-                                <select 
-                                    name="currency" id="currency"
-                                    className="w-[584px] h-[60px] border border-[#6B7280] rounded-[8px] pl-[40px]
-                                        text-[20px] font-inter font-[400] text-[#6B7280]"
-                                    onChange={updateUserData}
-                                    value={userData.currency}
-                                >
-                                    <option value="">Select Currency</option>
-                                    {
-                                        currencies.map((curr, index) => (
-                                            <option value={curr.name} key={index}>
-                                                {curr.sign} - {curr.name}
-                                            </option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
+                            <Select
+                                name="currency"
+                                image={currencyIcon}
+                                updateChange={updateUserData}
+                                value={userData.currency || "Select Currency"}
+                                list={currencies}
+                            />
                         </div>
                     </div>
                 </div>
                 <div className="mt-[24px] flex justify-end">
-                    <button className="w-[134px] h-[60px] bg-[#2563EB] rounded flex items-center justify-center
-                        text-[24px] font-bold font-inter text-[#FFFFFF] cursor-pointer
-                    "
-                    >
-                        Update
-                    </button>
+                    <Button 
+                        label="Update" 
+                        color="white" 
+                        bgColor="#2563EB"
+                        width={200}
+                    />
                 </div>
             </form>
         </div>

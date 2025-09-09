@@ -3,15 +3,12 @@ import RupeesIcon from '../../assets/rupees-icon.svg';
 import DefaultModal from "../reusable/model";
 import AddCategoryBudgetModal from "../models/add-category-budget";
 import Button from "../reusable/button";
+import MainHeading from "../reusable/heading";
 
 const BudgetSettings = memo(() => {
     return(
         <div>
-            <h1
-                className="text-[24px] font-bold font-inter text-[#111827]"
-            >
-                Budget Settings
-            </h1>
+            <MainHeading label="Budget Settings"/>
             <div className="flex justify-between mt-4">
 
                 {/* category Budget */}
