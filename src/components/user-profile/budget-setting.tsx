@@ -2,6 +2,7 @@ import { memo } from "react";
 import RupeesIcon from '../../assets/rupees-icon.svg';
 import DefaultModal from "../reusable/model";
 import AddCategoryBudgetModal from "../models/add-category-budget";
+import Button from "../reusable/button";
 
 const BudgetSettings = memo(() => {
     return(
@@ -53,9 +54,7 @@ const BudgetSettings = memo(() => {
                             <AddCategoryBudgetModal close={close} />
                         )}
                         trigger={(open) => (
-                            <button onClick={open} className="p-[4px] bg-blue-600 text-white rounded font-inter font-bold cursor-pointer py-[10px]">
-                                Add New Category Budget
-                            </button>
+                            <Button onClick={open} label="Add New Category Budget" bgColor="#2563EB" color="white"/>
                         )}                    />
                 </div>
                 {/* category Budget */}
@@ -73,9 +72,9 @@ const BudgetSettings = memo(() => {
                             " 
                         />
                     </div>
-                     <button  className="p-[4px] w-[200px] bg-blue-600 text-white rounded font-inter font-bold cursor-pointer py-[10px] self-end">
-                       Save
-                    </button>
+                    <div className="self-end">
+                        <Button label="Save" bgColor="#2563EB" color="white" width={200}/>
+                    </div>
                 </div>
                 {/* Monthly Budget */}
             </div>
