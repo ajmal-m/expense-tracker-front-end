@@ -55,6 +55,8 @@ const PersonalDetailsUpdate = memo ( () => {
                                 value={userData.name}
                                 handleChange={updateUserData}
                                 id="user-name"
+                                imageTop={19}
+                                imageLeft={15}
                             />
                         </div>
 
@@ -71,6 +73,8 @@ const PersonalDetailsUpdate = memo ( () => {
                                 value={userData.password}
                                 handleChange={updateUserData}
                                 id="user-password"
+                                imageTop={19}
+                                imageLeft={15}
                             />
                         </div>
                     </div>
@@ -89,6 +93,8 @@ const PersonalDetailsUpdate = memo ( () => {
                                 value={user?.email || ""}
                                 id="user-email"
                                 disabled={true}
+                                imageTop={22}
+                                imageLeft={15}
                             />
                         </div>
 
