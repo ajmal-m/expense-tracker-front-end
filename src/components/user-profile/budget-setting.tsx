@@ -1,4 +1,5 @@
 import { memo } from "react";
+import RupeesIcon from '../../assets/rupees-icon.svg';
 
 const BudgetSettings = memo(() => {
     return(
@@ -9,6 +10,8 @@ const BudgetSettings = memo(() => {
                 Budget Settings
             </h1>
             <div className="flex justify-between mt-4">
+
+                {/* category Budget */}
                 <div className="flex flex-col">
                     <h3
                         className="text-[16px] font-bold font-inter text-[#6B7280]"
@@ -43,7 +46,30 @@ const BudgetSettings = memo(() => {
                         </tr>
                         </tbody>
                     </table>
+                    <button  className="p-[4px] bg-blue-600 text-white rounded font-inter font-bold cursor-pointer py-[10px]">
+                       Add New Category Budget
+                    </button>
                 </div>
+                {/* category Budget */}
+
+                {/* Monthly Budget */}
+                <div className="flex flex-col gap-1">
+                    <h2 className="text-[#6B7280] text-[16px] font-bold font-inter">Monthly Budget</h2>
+                    <div className="relative">
+                        <img src={RupeesIcon} alt="rupees-icon" className="absolute top-[12px] left-[10px]"/>
+                        <input 
+                            value={'50,000'} type="text" 
+                            className="
+                                w-[584px] h-[48px] rounded-[8px] border border-[#6B7280]
+                                text-[#6B7280] text-[20px] font-[400] font-inter pl-[40px]
+                            " 
+                        />
+                    </div>
+                     <button  className="p-[4px] w-[200px] bg-blue-600 text-white rounded font-inter font-bold cursor-pointer py-[10px] self-end">
+                       Save
+                    </button>
+                </div>
+                {/* Monthly Budget */}
             </div>
         </div>
     )
