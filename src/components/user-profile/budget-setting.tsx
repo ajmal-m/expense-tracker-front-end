@@ -8,6 +8,7 @@ import { deleteBudget, getBudgets } from "../../api/budget-service";
 import { deleteBudgetItem, setAllBudgets } from "../../slices/budgetSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
+import DeleteModal from "../models/delete-modal";
 
 const BudgetSettings = memo(() => {
 
@@ -69,13 +70,20 @@ const BudgetSettings = memo(() => {
                                         <td className="px-6 py-4">{budget?.category?.name}</td>
                                         <td className="px-6 py-4">{budget.amount}</td>
                                         <td>
-                                            <button
-                                                className="
-                                                    px-2 py-1 bg-red-500 text-white rounded-2xl
-                                                    cursor-pointer
-                                                "
-                                                onClick={() => handleDeleteBudget(budget._id)}
-                                            >Delete</button>
+                                            <DefaultModal
+                                                model={(close) => (
+                                                    <DeleteModal close={close}  confirm={() =>handleDeleteBudget(budget._id)}/>
+                                                )}
+                                                trigger={(open) => (
+                                                    <button
+                                                        className="
+                                                            px-2 py-1 bg-red-500 text-white rounded-2xl
+                                                            cursor-pointer
+                                                        "
+                                                        onClick={open}
+                                                    >Delete</button>
+                                                )}
+                                            />
                                         </td>
                                     </tr>
                                 ))
