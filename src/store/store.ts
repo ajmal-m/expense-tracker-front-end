@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from '../slices/authSlice';
 import categoryReducer from '../slices/categorySlice';
+import budgetReducer from '../slices/budgetSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    category: categoryReducer
+    category: categoryReducer,
+    budget: budgetReducer
   },
 });
 

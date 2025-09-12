@@ -1,19 +1,33 @@
 import { memo, useCallback, useState } from "react";
-import { useSelector } from "react-redux";
-import { type RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { type AppDispatch, type RootState } from "../../store/store";
 import Button from "../reusable/button";
 import ImageInput from "../reusable/input-image";
+import { addBudget } from "../../api/budget-service";
+import { addBudgetItem } from "../../slices/budgetSlice";
 
 const AddCategoryBudgetModal = memo(({ close }: { close : () => void }) => {
+
+    const dispatch = useDispatch<AppDispatch>();
     const categories = useSelector((store: RootState) => store.category.categoryies);
     const [categoryBudget, setCategoryBudget] = useState({
-        categoryId: '',
+        category: '',
         amount:''
     });
 
     const updateCategoryBudget = useCallback((e: { target: { name: any; value: any; }; } ) => {
-        setCategoryBudget((c) => ({ ...c, [e.target.name] : [e.target.value]}));
-    }, [categoryBudget])
+        setCategoryBudget((c) => ({ ...c, [e.target.name] : e.target.value}));
+    }, [categoryBudget]);
+
+    const handleSubmit = useCallback( async () => {
+        try {
+            const data= await addBudget({ category : categoryBudget.category , amount: Number(categoryBudget.amount)});
+            dispatch(addBudgetItem(data));
+        } catch (error) {
+            console.log(error);
+        }
+    }, [categoryBudget]);
+
     return(
         <div 
             className="    
@@ -51,6 +65,7 @@ const AddCategoryBudgetModal = memo(({ close }: { close : () => void }) => {
                     color="white"
                     bgColor="#2563EB"
                     width={150}
+                    onClick={handleSubmit}
                 />
             </div>
         </div>
