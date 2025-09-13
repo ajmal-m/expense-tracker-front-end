@@ -5,6 +5,8 @@ import addDateIcon from '../../assets/date-add-expense.svg';
 import MainHeading from "../reusable/heading";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
+import { addExpense } from "../../api/expense-service";
+import toast from "react-hot-toast";
 
 
 const Label = memo(({ name , label} : { name:string; label:string;}) => {
@@ -46,8 +48,8 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
 
     const [expenseData, setExpenseData] = useState({
         amount:0,
-        category:null,
-        date:new Date(),
+        category:"",
+        date:"",
         notes:''
     }); 
 
@@ -61,8 +63,20 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
     }, [expenseData]);
 
 
-    const handleSubmit = useCallback(() => {
-        console.log(expenseData)
+    const handleSubmit = useCallback( async () => {
+        try {
+            console.log(expenseData);
+            await addExpense({
+                amount: Number(expenseData.amount),
+                category: expenseData.category,
+                date: expenseData.date,
+                notes: expenseData.notes
+            });
+            toast.success("Expense added");
+        } catch (error : any) {
+            console.log(error);
+            toast.error(`Error - ${error.data.response.message}`);
+        }
     }, [expenseData])
 
 
