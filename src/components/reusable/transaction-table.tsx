@@ -8,7 +8,9 @@ import acuionIcon from '../../assets/action.svg';
 import EditIcon from '../../assets/edit.svg';
 import deleteIcon from '../../assets/delete.svg';
 
-const TransactionTable = memo( () => {
+const TransactionTable = memo( ({ expenses } : {
+  expenses : { amount: number; notes: string; category: string; date: string, _id: string }[]
+}) => {
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -59,12 +61,12 @@ const TransactionTable = memo( () => {
         </thead>
         <tbody>
           {
-            [1,2,3].map((_, index) => (
+            expenses.map((expense, index) => (
               <tr key={index} className="bg-white border-b dark:bg-[#FFFFFF] dark:border-gray-700 border-gray-200">
-                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Aug 15, 2025</td>
-                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">₹2,500</td>
-                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Groceries</td>
-                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">Weekly supermarket run</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">{expense.date}</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">₹{expense.amount}</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">{expense.category?.name}</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">{expense.notes}</td>
                 <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">debit card</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
