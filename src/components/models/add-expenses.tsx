@@ -1,8 +1,10 @@
-import { memo } from "react";
+import { memo, useCallback, useState } from "react";
 import AddExpenseIcon from '../../assets/add_expense.svg';
 import addAmountIcon from '../../assets/amount-add-expense.svg';
-import categoryIcon from '../../assets/category-add-expense.svg';
 import addDateIcon from '../../assets/date-add-expense.svg';
+import MainHeading from "../reusable/heading";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 
 
 const Label = memo(({ name , label} : { name:string; label:string;}) => {
@@ -39,6 +41,31 @@ const Button = memo((
 
 
 const AddExpenseModel = memo(({ close }: { close : () => void }) => {
+
+    const categories = useSelector(( store : RootState) => store.category.categoryies);
+
+    const [expenseData, setExpenseData] = useState({
+        amount:0,
+        category:null,
+        date:new Date(),
+        notes:''
+    }); 
+
+
+    const handleChangeExpense = useCallback((e: { target: { name: any; value: any; }; }) => {
+        let {name, value} = e.target;
+        if(name === 'amount' && Number(value) < 1){
+            value = 0;
+        }
+        setExpenseData(expense => ({ ...expense, [name]: value}));
+    }, [expenseData]);
+
+
+    const handleSubmit = useCallback(() => {
+        console.log(expenseData)
+    }, [expenseData])
+
+
     return(
         <div
             className="
@@ -48,12 +75,7 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
             "
         >
             <img src={AddExpenseIcon} alt="add-expense-icon"/>
-            <h2
-                className="
-                    text-[24px] font-bold font-inter
-                    text-[#111827]
-                "
-            >Add Expense</h2>
+            <MainHeading label="Add Expense"/>
 
             <form>
                 {/* Amount Input field */}
@@ -61,12 +83,14 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
                     <Label name="amount" label="Amount"  />
                     <div className="relative">
                         <input 
-                            type="text" name="amount" id="amount" 
+                            type="number" name="amount" id="amount" 
                             className="w-[654px] h-[48px] rounded-[8px] border border-[#6B7280]
                                 placeholder:text-[20px] placeholder:font-inter placeholder:text-[#6B7280]
                                 pl-[45px]
                             " 
                             placeholder="Enter Amount"
+                            value={expenseData.amount}
+                            onChange={handleChangeExpense}
                         />
                         <img src={addAmountIcon} alt="amount-icon"  className="absolute top-[14px] left-[9px]"/>
                     </div>
@@ -75,17 +99,16 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
                 {/* category Input field */}
                 <div className="flex flex-col gap-1 mt-[36px]">
                     <Label name="category" label="Category"  />
-                    <div className="relative">
-                        <input 
-                            type="text" name="amount" id="amount" 
-                            className="w-[654px] h-[48px] rounded-[8px] border border-[#6B7280]
+                    <select name="category" id="category" className="w-[654px] h-[48px] rounded-[8px] border border-[#6B7280]
                                 placeholder:text-[20px] placeholder:font-inter placeholder:text-[#6B7280]
-                                pl-[45px]
-                            " 
-                            placeholder="Select Category"
-                        />
-                        <img src={categoryIcon} alt="amount-icon"  className="absolute top-[14px] left-[9px]"/>
-                    </div>
+                                pl-[45px]"  onChange={handleChangeExpense} >
+                        <option value="">Select an catgory</option>
+                        {
+                            categories.length > 0 && categories.map((cate) => (
+                                <option value={cate._id}>{cate.name}</option>
+                            ))
+                        }
+                    </select>
                 </div>
 
 
@@ -100,6 +123,7 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
                                 pl-[45px]
                             " 
                             placeholder="Select Date"
+                            onChange={handleChangeExpense}
                         />
                         <img src={addDateIcon} alt="date-icon"  className="absolute top-[14px] left-[9px]"/>
                     </div>
@@ -115,12 +139,14 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
                             p-[12px]
                         "
                         placeholder="Write something..."
+                        onChange={handleChangeExpense}
+                        value={expenseData.notes}
                     ></textarea>
                 </div>
 
                 {/* Button group */}
                 <div className="flex items-center gap-[14px] mt-[12px]">
-                    <Button label="ADD" color="#2563EB"/>
+                    <Button label="ADD" color="#2563EB" onClick={handleSubmit} />
                     <Button label="CANCEL" color="#FF0000" onClick={close}/>
                 </div>
             </form>
