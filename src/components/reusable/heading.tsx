@@ -15,3 +15,12 @@ const MainHeading = memo((
 });
 
 export default MainHeading;
+
+
+export const SubHeading = memo(({ label }: { label: string}) => {
+    return(
+        <h2 className="text-[#6B7280] text-[16px] font-bold font-inter">
+            {label}
+        </h2>
+    )
+})

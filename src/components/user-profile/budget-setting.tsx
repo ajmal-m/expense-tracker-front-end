@@ -1,5 +1,4 @@
 import { memo, useCallback, useEffect } from "react";
-import RupeesIcon from '../../assets/rupees-icon.svg';
 import DefaultModal from "../reusable/model";
 import AddCategoryBudgetModal from "../models/add-category-budget";
 import Button from "../reusable/button";
@@ -9,6 +8,7 @@ import { deleteBudgetItem, setAllBudgets } from "../../slices/budgetSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import DeleteModal from "../models/delete-modal";
+import MonthlyBudget from "./monthly-budget";
 
 const BudgetSettings = memo(() => {
 
@@ -38,7 +38,7 @@ const BudgetSettings = memo(() => {
         } catch (error) {
             console.log(error);
         }
-    }, [])
+    }, []);
     return(
         <div>
             <MainHeading label="Budget Settings"/>
@@ -102,22 +102,7 @@ const BudgetSettings = memo(() => {
                 {/* category Budget */}
 
                 {/* Monthly Budget */}
-                <div className="flex flex-col gap-1">
-                    <h2 className="text-[#6B7280] text-[16px] font-bold font-inter">Monthly Budget</h2>
-                    <div className="relative">
-                        <img src={RupeesIcon} alt="rupees-icon" className="absolute top-[12px] left-[10px]"/>
-                        <input 
-                            value={'50,000'} type="text" 
-                            className="
-                                w-[584px] h-[48px] rounded-[8px] border border-[#6B7280]
-                                text-[#6B7280] text-[20px] font-[400] font-inter pl-[40px]
-                            " 
-                        />
-                    </div>
-                    <div className="self-end">
-                        <Button label="Save" bgColor="#2563EB" color="white" width={200}/>
-                    </div>
-                </div>
+                <MonthlyBudget/>
                 {/* Monthly Budget */}
             </div>
         </div>
