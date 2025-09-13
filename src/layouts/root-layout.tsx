@@ -4,6 +4,7 @@ import { logout, updateUser } from "../slices/authSlice";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../store/store";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/reusable/loader";
 
 const RootLayout = memo(({ children }: { children : ReactNode}) => {
 
@@ -27,7 +28,9 @@ const RootLayout = memo(({ children }: { children : ReactNode}) => {
         checkAuth();
     }, [dispatch, navigate]);
 
-    if(loading) return "Dashboard Loading";
+    if(loading) return (
+        null
+    );
 
     return(
         <>
