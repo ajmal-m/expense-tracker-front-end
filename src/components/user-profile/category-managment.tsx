@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { setAllCategories, setSingleCategory, removeCategoryItem } from "../../slices/categorySlice";
 import MainHeading from "../reusable/heading";
+import DefaultModal from "../reusable/model";
+import DeleteModal from "../models/delete-modal";
 
 const CategoryManagment = memo(() => {
     const categories = useSelector((store: RootState) => store.category.categoryies);
@@ -54,9 +56,19 @@ const CategoryManagment = memo(() => {
                    categories.length > 0 && categories.map((cat) => (
                         <div className="px-[16px] py-[8px] bg-[#E5E7EB] flex items-center gap-2" key={cat._id}>
                             <p className="text-[#6B7280] text-[24px] font-inter font-semibold">{cat.name}</p>
-                            <button type="button" className="cursor-pointer" onClick={() => removeCategory(cat)}>
-                                <img src={cancelIcon} alt="cancel-icon"/>
-                            </button>
+                            <DefaultModal
+                                model={(close) => (
+                                    <DeleteModal
+                                        close={close}
+                                        confirm={() => removeCategory(cat)}
+                                    />
+                                )}
+                                trigger={(open) => (
+                                    <button type="button" className="cursor-pointer" onClick={open}>
+                                        <img src={cancelIcon} alt="cancel-icon"/>
+                                    </button>
+                                )}
+                            />
                         </div>
                     ))
                 }

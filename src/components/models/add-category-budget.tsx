@@ -38,6 +38,7 @@ const AddCategoryBudgetModal = memo(({ close }: { close : () => void }) => {
         >
             <select name="category" id="category" className="w-[584px] h-[60px] border border-[#6B7280] rounded-[8px] pl-[40px]
                     text-[20px] font-inter font-[400] text-[#6B7280]"  onChange={updateCategoryBudget}>
+                <option value="">Select an catgory</option>
                 {
                     categories.length > 0 && categories.map((cate) => (
                         <option value={cate._id}>{cate.name}</option>
