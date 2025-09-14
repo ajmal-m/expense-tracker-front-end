@@ -1,15 +1,18 @@
 import { memo } from "react";
 import Chart from "react-apexcharts";
 
-const PieChart = memo( () => {
+const PieChart = memo( ({ labels , values} : {
+    labels:string[],
+    values:number[]
+}) => {
   const chartData = {
-    series: [44, 55, 13, 43, 22],
+    series: values,
     options: {
       chart: {
         width: 380,
         type: "pie",
       },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      labels: labels,
       responsive: [
         {
           breakpoint: 480,
