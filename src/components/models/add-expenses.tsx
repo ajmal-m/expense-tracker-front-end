@@ -3,10 +3,11 @@ import AddExpenseIcon from '../../assets/add_expense.svg';
 import addAmountIcon from '../../assets/amount-add-expense.svg';
 import addDateIcon from '../../assets/date-add-expense.svg';
 import MainHeading from "../reusable/heading";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { type AppDispatch, type RootState } from "../../store/store";
 import { addExpense } from "../../api/expense-service";
 import toast from "react-hot-toast";
+import { setSingleExpense } from "../../slices/expenseSlice";
 
 
 const Label = memo(({ name , label} : { name:string; label:string;}) => {
@@ -44,6 +45,7 @@ const Button = memo((
 
 const AddExpenseModel = memo(({ close }: { close : () => void }) => {
 
+    const dispatch = useDispatch<AppDispatch>();
     const categories = useSelector(( store : RootState) => store.category.categoryies);
 
     const [expenseData, setExpenseData] = useState({
@@ -66,7 +68,7 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
     const handleSubmit = useCallback( async () => {
         try {
             let [year, month, day] = expenseData.date.split('-');
-            await addExpense({
+            const data  = await addExpense({
                 amount: Number(expenseData.amount),
                 category: expenseData.category,
                 day: Number(day),
@@ -74,7 +76,9 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
                 year: Number(year),
                 notes: expenseData.notes
             });
+            dispatch(setSingleExpense(data));
             toast.success("Expense added");
+            close();
         } catch (error : any) {
             console.log(error);
             toast.error(`Error - ${error.data.response.message}`);

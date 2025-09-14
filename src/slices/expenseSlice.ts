@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface ExpenseSlice {
-  expenses: { amount: number; notes: string; category: string; date: string, _id: string }[];
+  expenses: { amount: number; notes: string; category: string; day:string; month:string; year:string; _id: string }[];
 }
 
 const initialState: ExpenseSlice = {
@@ -12,14 +12,14 @@ const expenseSlice = createSlice({
   name: "expense",
   initialState,
   reducers: {
-    setAllExpenses: (state, action: PayloadAction<{ amount: number; notes: string; category: string; date: string, _id: string }[]>) => {
+    setAllExpenses: (state, action: PayloadAction<{ amount: number; notes: string; category: string; day:string; month:string; year:string; _id: string }[]>) => {
         console.log(action.payload);
         state.expenses = [ ...action.payload];
     },
     removeExpenseItem:(state, action: PayloadAction<string>) => {
         state.expenses = state.expenses.filter(expense => expense._id !== action.payload);
     },
-    setSingleExpense: (state, action: PayloadAction<{ amount: number; notes: string; category: string; date: string ; _id: string}>) => {
+    setSingleExpense: (state, action: PayloadAction<{ amount: number; notes: string; category: string; day:string; month:string; year:string; _id: string }>) => {
         state.expenses.push(action.payload);
     }
   }

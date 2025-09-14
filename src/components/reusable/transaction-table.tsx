@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import DateIcon from '../../assets/date.svg';
 import amountIcon from '../../assets/amount.svg';
 import categoryIcon from '../../assets/category.svg';
@@ -7,10 +7,30 @@ import paymentIcon from '../../assets/payment.svg';
 import acuionIcon from '../../assets/action.svg';
 import EditIcon from '../../assets/edit.svg';
 import deleteIcon from '../../assets/delete.svg';
+import { deleteExpense } from "../../api/expense-service";
+import DefaultModal from "./model";
+import DeleteModal from "../models/delete-modal";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { type AppDispatch } from "../../store/store";
+import { removeExpenseItem } from "../../slices/expenseSlice";
 
 const TransactionTable = memo( ({ expenses } : {
   expenses : { amount: number; notes: string; category: string; day: string, _id: string; month:string;year:string; }[]
 }) => {
+
+  const dispatch = useDispatch<AppDispatch>();
+  const handleDeleteExpense = useCallback(async (id : string) => {
+    try {
+      await deleteExpense({ id });
+      dispatch(removeExpenseItem(id));
+      toast.success("Expense delete successfully.")
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -73,9 +93,19 @@ const TransactionTable = memo( ({ expenses } : {
                     <button>
                       <img src={EditIcon} alt="edit-icon"/>
                     </button>
-                    <button>
-                      <img src={deleteIcon} alt="delete-icon"/>
-                    </button>
+                    <DefaultModal
+                      trigger={(open) => (
+                        <button onClick={open} className="cursor-pointer">
+                          <img src={deleteIcon} alt="delete-icon"/>
+                        </button>
+                      )}
+
+                      model={
+                        (close) => (
+                          <DeleteModal close={close} confirm={() => { handleDeleteExpense(expense._id) ; close();} }/>
+                        )
+                      }
+                    />
                   </div>
                 </td>
               </tr>

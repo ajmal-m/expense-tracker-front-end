@@ -10,3 +10,8 @@ export const addExpense = async ({ amount, notes, category, day, month, year }:
     const response = await axiosInstance.post("/expense/create", { amount, notes, category, day, month, year });
     return response.data;
 }
+
+export const deleteExpense = async ({id}: {id: string}) => {
+    const response = await axiosInstance.delete(`/expense/${id}`);
+    return response.data;
+}
