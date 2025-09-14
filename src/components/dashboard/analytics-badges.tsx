@@ -1,15 +1,27 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import AnalyticsImage from '../../assets/analyticsImage.svg';
 import BadgeLayout from "../../layouts/badge-layout";
 import BudgetIcon from '../../assets/budgeticon.svg';
 import BudgetSummaryIcon from '../../assets/budget_summary_icon.svg';
 import ProgressBar from "../reusable/progress-bar";
 import currencies from '../../data/currencies.json';
+import { getCurrentMonthExpense } from "../../api/analytics-service";
+import { formatNumber } from "../../utils/helpers";
 
 const AnalyticsBadges = memo(() => {
 
     const currency = JSON.parse(localStorage.getItem("currency") || "");
     const currencyIcon = currencies.find((curr) => curr.name === currency)?.value || "₹";
+    const [expenseData, setExpenseData] = useState<any>({});
+
+    useEffect(() => {
+        const fetchCurrentMonthExpense = async() => {
+            const data = await getCurrentMonthExpense();
+            setExpenseData(data);
+        };
+
+        fetchCurrentMonthExpense();
+    }, [])
     return(
         <>
         <div className="mt-[24px]">
@@ -26,7 +38,7 @@ const AnalyticsBadges = memo(() => {
                     <div className="flex justify-between items-center w-[100%] px-[16px]">
                         <div className="flex flex-col gap-[6px]">
                             <p className="text-[#111827] text-[18px] font-[400] font-inter">Monthly Spending</p>
-                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">{currencyIcon}42,300</p>
+                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">{currencyIcon}{formatNumber(expenseData?.expense)}</p>
                             <p className="text-[14px] font-inter">📈 +12% vs last month</p>
                         </div>
                         <img src={AnalyticsImage} alt="analytics-image" />
@@ -36,12 +48,13 @@ const AnalyticsBadges = memo(() => {
                     <div className="flex justify-between items-center w-[100%] px-[16px]">
                         <div className="flex flex-col gap-[6px]">
                             <p className="text-[#111827] text-[18px] font-[400] font-inter">Budget Remaining</p>
-                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">{currencyIcon}7,700 left of {currencyIcon}50,000</p>
+                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">
+                                {currencyIcon}{formatNumber(expenseData?.remains)} left of {currencyIcon}{formatNumber(expenseData?.budget)}</p>
                             <div className="flex items-center gap-[4px]">
                                 <div className="w-[100px]">
-                                    <ProgressBar width={85} color=""/>
+                                    <ProgressBar width={expenseData.remainPercentage} color="yellow"/>
                                 </div>
-                                 <span className="text-[#6B7280]">15% remaining</span>
+                                 <span className="text-[#6B7280]">{expenseData.remainPercentage}% remaining</span>
                             </div>
                         </div>
                         <img src={BudgetIcon} alt="budget-image" />
@@ -80,12 +93,12 @@ const AnalyticsBadges = memo(() => {
                 >
                     <div className="flex flex-col gap-[6px]">
                         <p className="text-[18px] font-[400] font-inter text-[#111827]">Monthly Budget</p>
-                        <h2 className="text-[20px] font-semibold font-inter text-[#2563EB]" >{currencyIcon}42,300 of {currencyIcon}50,000 used</h2>
+                        <h2 className="text-[20px] font-semibold font-inter text-[#2563EB]" >{currencyIcon}{formatNumber(expenseData?.expense)} of {currencyIcon}{formatNumber(expenseData?.budget)} used</h2>
                         <div className="flex items-center gap-[6px]">
                             <div className="w-[70px]">
                                 <ProgressBar width={85} color="#F8BD00"/>
                             </div>
-                            <p className="text-[#6B7280] text-[14px] font-medium font-inter">85% spent</p>
+                            <p className="text-[#6B7280] text-[14px] font-medium font-inter">{expenseData?.spended}% spent</p>
                         </div>
                     </div>
 
