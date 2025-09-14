@@ -20,7 +20,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         localStorage.setItem("expense-tracker-token", action.payload.token);
         localStorage.setItem("user", JSON.stringify(action.payload.user));
-
+        localStorage.setItem("currency", JSON.stringify(action.payload.user.currency));
     },
     logout: (state) => {
         state.user = null;
@@ -32,9 +32,15 @@ const authSlice = createSlice({
         const { name, email, _id , currency } = action.payload;
         state.user = { id: _id, name, email , currency: currency || ""};
         localStorage.setItem("user", JSON.stringify(state.user));
+    },
+    updateCurrency: (state, action: PayloadAction<{ currency: string }>) => {
+      if(state.user){
+          state.user.currency = action.payload.currency;
+          localStorage.setItem("currency", JSON.stringify(action.payload.currency));
+      }
     }
   }
 });
 
-export const { loginSuccess, logout, updateUser } = authSlice.actions;
+export const { loginSuccess, logout, updateUser, updateCurrency } = authSlice.actions;
 export default authSlice.reducer;

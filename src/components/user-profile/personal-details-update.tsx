@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../../store/store";
 import currencies from '../../data/currencies.json';
 import { updateUserDetails } from "../../api/user-services";
-import { updateUser } from "../../slices/authSlice";
+import { updateCurrency, updateUser } from "../../slices/authSlice";
 import toast from "react-hot-toast";
 import ImageInput from "../reusable/input-image";
 import Label from "../reusable/label";
@@ -35,6 +35,7 @@ const PersonalDetailsUpdate = memo ( () => {
             const data = await updateUserDetails(userData);
             toast.success("User updated successfully.");
             dispatch(updateUser(data));
+            dispatch(updateCurrency({currency: data?.currency }))
         } catch (error) {
             console.log(error);
         }

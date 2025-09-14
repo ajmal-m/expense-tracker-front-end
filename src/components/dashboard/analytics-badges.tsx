@@ -4,13 +4,11 @@ import BadgeLayout from "../../layouts/badge-layout";
 import BudgetIcon from '../../assets/budgeticon.svg';
 import BudgetSummaryIcon from '../../assets/budget_summary_icon.svg';
 import ProgressBar from "../reusable/progress-bar";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
 import currencies from '../../data/currencies.json';
 
 const AnalyticsBadges = memo(() => {
 
-    const currency = useSelector(( store : RootState) => store.auth.user?.currency );
+    const currency = JSON.parse(localStorage.getItem("currency") || "");
     const currencyIcon = currencies.find((curr) => curr.name === currency)?.value || "₹";
     return(
         <>
