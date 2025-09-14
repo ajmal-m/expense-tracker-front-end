@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import AddExpenseIcon from '../../assets/add_expense.svg';
 import addAmountIcon from '../../assets/amount-add-expense.svg';
 import addDateIcon from '../../assets/date-add-expense.svg';
@@ -8,6 +8,8 @@ import { type AppDispatch, type RootState } from "../../store/store";
 import { addExpense } from "../../api/expense-service";
 import toast from "react-hot-toast";
 import { setSingleExpense } from "../../slices/expenseSlice";
+import { getCategories } from "../../api/category-services";
+import { setAllCategories } from "../../slices/categorySlice";
 
 
 const Label = memo(({ name , label} : { name:string; label:string;}) => {
@@ -83,7 +85,21 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
             console.log(error);
             toast.error(`Error - ${error.data.response.message}`);
         }
-    }, [expenseData])
+    }, [expenseData]);
+
+
+    useEffect(() => {
+        const fetchCatgories = async () => {
+            try {
+                const data = await getCategories();
+                dispatch(setAllCategories(data));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchCatgories();
+    },[])
 
 
     return(
