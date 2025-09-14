@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import DeleteModal from "../models/delete-modal";
 import MonthlyBudget from "./monthly-budget";
+import { formatNumber } from "../../utils/helpers";
 
 const BudgetSettings = memo(() => {
 
@@ -68,7 +69,7 @@ const BudgetSettings = memo(() => {
                                 budgets.length > 0 && budgets.map((budget) => (
                                     <tr className="bg-white dark:bg-[#FFFFFF] text-[20px] font-medium font-inter text-[#6B7280]">
                                         <td className="px-6 py-4">{budget?.category?.name}</td>
-                                        <td className="px-6 py-4">{budget.amount}</td>
+                                        <td className="px-6 py-4">{ formatNumber(budget.amount)}</td>
                                         <td>
                                             <DefaultModal
                                                 model={(close) => (

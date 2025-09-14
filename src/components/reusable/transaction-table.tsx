@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { type AppDispatch } from "../../store/store";
 import { removeExpenseItem } from "../../slices/expenseSlice";
+import { formatNumber } from "../../utils/helpers";
 
 const TransactionTable = memo( ({ expenses } : {
   expenses : { amount: number; notes: string; category: string; day: string, _id: string; month:string;year:string; }[]
@@ -84,7 +85,7 @@ const TransactionTable = memo( ({ expenses } : {
             expenses.map((expense, index) => (
               <tr key={index} className="bg-white border-b dark:bg-[#FFFFFF] dark:border-gray-700 border-gray-200">
                 <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">{expense.day}/{expense.month}/{expense.year}</td>
-                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">₹{expense.amount}</td>
+                <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">₹{formatNumber(expense.amount)}</td>
                 <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">{expense.category?.name}</td>
                 <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">{expense.notes}</td>
                 <td className="px-6 py-4 text-[20px] text-[#6B7280] font-inter font-medium">debit card</td>
