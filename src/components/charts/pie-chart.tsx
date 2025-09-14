@@ -34,7 +34,7 @@ const PieChart = memo( ({ labels , values} : {
         options={chartData.options}
         series={chartData.series}
         type="pie"
-        width={380}
+        width={500}
       />
   );
 });
