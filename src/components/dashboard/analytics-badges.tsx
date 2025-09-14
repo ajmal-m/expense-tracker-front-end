@@ -115,48 +115,46 @@ const AnalyticsBadges = memo(() => {
                     </div>
 
                     <div className="flex items-center gap-[20px]">
-                        <div className="flex flex-col gap-[8px]">
-                            <div className="flex flex-col items-center justify-between gap-[4px]">
-                                <div className="flex items-center justify-between gap-1">
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Groceries</p>
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >83%</p>
-                                </div>
-                                <ProgressBar width={83} color="#F8BD00" />
-                                <p 
-                                    className="text-[12px] font-medium font-inter text-[#F59E0B]"
-                                >
-                                    ⚠️ 80% reaches
-                                </p>
-                            </div>
-                            <div className="flex flex-col items-center justify-between gap-[4px]">
-                                <div className="flex items-center justify-between gap-1">
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Transport</p>
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >70%</p>
-                                </div>
-                                <ProgressBar width={70} color="#F8BD00"/>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-[8px]">
-                            <div className="flex flex-col items-center justify-between gap-[4px]">
-                                <div className="flex items-center justify-between gap-1">
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Groceries</p>
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >83%</p>
-                                </div>
-                                <ProgressBar width={83}  color="#F8BD00" />
-                                <p 
-                                    className="text-[12px] font-medium font-inter text-[#F59E0B]"
-                                >
-                                    ⚠️ 80% reaches
-                                </p>
-                            </div>
-                            <div className="flex flex-col items-center justify-between gap-[4px]">
-                                <div className="flex items-center justify-between gap-1">
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter">Transport</p>
-                                    <p className="text-[14px] text-[#6B7280] font-medium font-inter" >70%</p>
-                                </div>
-                                <ProgressBar width={70}  color="red"/>
-                            </div>
+                        <div className="flex flex-wrap gap-4">
+                            {
+                                budgetAnalytics.slice(0,5).map((budget, index) => (
+                                    <div className="flex flex-col items-center gap-[4px]" key={index}>
+                                        <div className="flex items-center justify-between gap-1">
+                                            <p className="text-[14px] text-[#6B7280] font-medium font-inter">
+                                                {
+                                                    budget?.categoryName
+                                                }
+                                            </p>
+                                            <p className="text-[14px] text-[#6B7280] font-medium font-inter" > -  
+                                                <span className="font-[500] text-black px-1">
+                                                     {
+                                                        Number((budget.totalExpense/budget.budgetedAmount) * 100).toFixed(1)
+                                                    }%
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <ProgressBar 
+                                            width={Number((budget.totalExpense/budget.budgetedAmount) * 100)>=100 ? 100 : Number((budget.totalExpense/budget.budgetedAmount) * 100)} 
+                                            color={Number((budget.totalExpense/budget.budgetedAmount) * 100)>=100 ? 'red' : "#F8BD00"} />
+                                        {
+                                            Number((budget.totalExpense/budget.budgetedAmount) * 100) >= 100  ? (
+                                                <p 
+                                                    className="text-[12px] font-medium font-inter text-[#f50b0b]"
+                                                >
+                                                    Over Budget
+                                                </p>
+                                            ) :  Number((budget.totalExpense/budget.budgetedAmount) * 100) >= 80 && (
+                                                <p 
+                                                    className="text-[12px] font-medium font-inter text-[#F59E0B]"
+                                                >
+                                                    ⚠️ 80% reaches
+                                                </p>
+                                            )
+                                        }
+                                    </div>
+                                ))
+                            }
+                            
                         </div>
                     </div>
                 </div>
