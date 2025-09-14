@@ -4,8 +4,14 @@ import BadgeLayout from "../../layouts/badge-layout";
 import BudgetIcon from '../../assets/budgeticon.svg';
 import BudgetSummaryIcon from '../../assets/budget_summary_icon.svg';
 import ProgressBar from "../reusable/progress-bar";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
+import currencies from '../../data/currencies.json';
 
 const AnalyticsBadges = memo(() => {
+
+    const currency = useSelector(( store : RootState) => store.auth.user?.currency );
+    const currencyIcon = currencies.find((curr) => curr.name === currency)?.value || "₹";
     return(
         <>
         <div className="mt-[24px]">
@@ -22,7 +28,7 @@ const AnalyticsBadges = memo(() => {
                     <div className="flex justify-between items-center w-[100%] px-[16px]">
                         <div className="flex flex-col gap-[6px]">
                             <p className="text-[#111827] text-[18px] font-[400] font-inter">Monthly Spending</p>
-                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">₹42,300</p>
+                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">{currencyIcon}42,300</p>
                             <p className="text-[14px] font-inter">📈 +12% vs last month</p>
                         </div>
                         <img src={AnalyticsImage} alt="analytics-image" />
@@ -32,7 +38,7 @@ const AnalyticsBadges = memo(() => {
                     <div className="flex justify-between items-center w-[100%] px-[16px]">
                         <div className="flex flex-col gap-[6px]">
                             <p className="text-[#111827] text-[18px] font-[400] font-inter">Budget Remaining</p>
-                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">₹7,700 left of ₹50,000</p>
+                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">{currencyIcon}7,700 left of {currencyIcon}50,000</p>
                             <div className="flex items-center gap-[4px]">
                                 <div className="w-[100px]">
                                     <ProgressBar width={85} color=""/>
@@ -47,7 +53,7 @@ const AnalyticsBadges = memo(() => {
                     <div className="flex justify-between items-center w-[100%] px-[16px]">
                         <div className="flex flex-col gap-[6px]">
                             <p className="text-[#111827] text-[18px] font-[400] font-inter">Savings Rate</p>
-                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">₹15,000 / ₹20,000</p>
+                            <p className="text-[#2563EB] text-[20px] font-semibold font-inter">{currencyIcon}15,000 / {currencyIcon}20,000</p>
                             <p className="text-[14px] font-inter">On track – 75% reached</p>
                         </div>
                         <img src={BudgetIcon} alt="budget-image" />
@@ -76,7 +82,7 @@ const AnalyticsBadges = memo(() => {
                 >
                     <div className="flex flex-col gap-[6px]">
                         <p className="text-[18px] font-[400] font-inter text-[#111827]">Monthly Budget</p>
-                        <h2 className="text-[20px] font-semibold font-inter text-[#2563EB]" >₹42,300 of ₹50,000 used</h2>
+                        <h2 className="text-[20px] font-semibold font-inter text-[#2563EB]" >{currencyIcon}42,300 of {currencyIcon}50,000 used</h2>
                         <div className="flex items-center gap-[6px]">
                             <div className="w-[70px]">
                                 <ProgressBar width={85} color="#F8BD00"/>
