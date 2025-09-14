@@ -1,11 +1,11 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import AnalyticsImage from '../../assets/analyticsImage.svg';
 import BadgeLayout from "../../layouts/badge-layout";
 import BudgetIcon from '../../assets/budgeticon.svg';
 import BudgetSummaryIcon from '../../assets/budget_summary_icon.svg';
 import ProgressBar from "../reusable/progress-bar";
 import currencies from '../../data/currencies.json';
-import { getCurrentMonthExpense } from "../../api/analytics-service";
+import { getCurrentMonthExpense , getBudgetAnalytics } from "../../api/analytics-service";
 import { formatNumber } from "../../utils/helpers";
 
 const AnalyticsBadges = memo(() => {
@@ -13,15 +13,27 @@ const AnalyticsBadges = memo(() => {
     const currency = JSON.parse(localStorage.getItem("currency") || "");
     const currencyIcon = currencies.find((curr) => curr.name === currency)?.value || "₹";
     const [expenseData, setExpenseData] = useState<any>({});
+    const [budgetAnalytics, setBudgetAnalytics] = useState([]);
 
     useEffect(() => {
         const fetchCurrentMonthExpense = async() => {
             const data = await getCurrentMonthExpense();
+            const budgetDatas = await getBudgetAnalytics();
             setExpenseData(data);
+            setBudgetAnalytics(budgetDatas);
         };
 
         fetchCurrentMonthExpense();
-    }, [])
+    }, []);
+
+
+
+    const numberOfOverBudget = useMemo(() => {
+        const overBudgetCount = budgetAnalytics.filter((item) => item.status ===  "Over Budget").length;
+        const underBudget = budgetAnalytics.length -  ( overBudgetCount || 0);
+        return { 'overBudget' : overBudgetCount, 'underBudget' : underBudget };
+    }, [budgetAnalytics]);
+
     return(
         <>
         <div className="mt-[24px]">
@@ -76,8 +88,8 @@ const AnalyticsBadges = memo(() => {
                     <div className="flex justify-between items-center w-[100%] px-[16px]">
                         <div className="flex flex-col gap-[6px]">
                             <p className="text-[#111827] text-[18px] font-[400] font-inter">Budget Summary</p>
-                            <p className="text-[#6B7280] font-[400] font-inter text-[14px]">3 of 5 categories under budget</p>
-                            <p className="text-[#6B7280] text-[14px] font-inter font-[400]">⚠️ 2 categories near limit</p>
+                            <p className="text-[#6B7280] font-[400] font-inter text-[14px]">{numberOfOverBudget.underBudget} of {budgetAnalytics.length} categories under budget</p>
+                            <p className="text-[#6B7280] text-[14px] font-inter font-[400]">⚠️ {numberOfOverBudget.overBudget} categories near limit</p>
                         </div>
                         <img src={BudgetSummaryIcon} alt="budget-summary-icon" />
                     </div>
