@@ -65,11 +65,13 @@ const AddExpenseModel = memo(({ close }: { close : () => void }) => {
 
     const handleSubmit = useCallback( async () => {
         try {
-            console.log(expenseData);
+            let [year, month, day] = expenseData.date.split('-');
             await addExpense({
                 amount: Number(expenseData.amount),
                 category: expenseData.category,
-                date: expenseData.date,
+                day: Number(day),
+                month:Number(month),
+                year: Number(year),
                 notes: expenseData.notes
             });
             toast.success("Expense added");
