@@ -23,7 +23,10 @@ const RecentTransactions = memo(() => {
             <h2 className="text-[24px] text-[#111827] font-inter font-semibold" >Recent Transactions</h2>
             <div className="mt-[24px]">
                 <TransactionTable
-                    expenses={expenses}
+                    expenses={expenses.map(expense => ({
+                        ...expense,
+                        category: { name: expense.category }
+                    }))}
                 />
             </div>
         </div>
