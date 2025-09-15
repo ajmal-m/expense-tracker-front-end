@@ -12,13 +12,18 @@ const AnalyticsBadges = memo(() => {
 
     const currency = JSON.parse(localStorage.getItem("currency") || "");
     const currencyIcon = currencies.find((curr) => curr.name === currency)?.value || "₹";
-    const [expenseData, setExpenseData] = useState<any>({});
+    const [expenseData, setExpenseData] = useState<any>({
+        "expense": 0,
+        "budget": 0,
+        "spended": "0",
+        "remains": 0,
+        "remainPercentage": "0"
+    });
     type BudgetAnalyticsItem = {
         status: string;
         categoryName: string;
         totalExpense: number;
         budgetedAmount: number;
-        // add other properties if needed
     };
     
     const [budgetAnalytics, setBudgetAnalytics] = useState<BudgetAnalyticsItem[]>([]);
