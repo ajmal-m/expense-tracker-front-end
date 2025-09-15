@@ -96,7 +96,7 @@ const LoginPage = memo(() => {
                             OR
                         </span>
                     </div>
-                    <div className="mt-[12px]">
+                    <div className="mt-[12px] flex justify-center">
                         <GoogleLogin
                             onSuccess={(credentialResponse) => {
                                 if (credentialResponse.credential) {
@@ -105,27 +105,12 @@ const LoginPage = memo(() => {
                             }}
                             onError={() => {
                                 console.log("Login Failed");
-                            }} 
-                            render={(renderProps : any) => (
-                                <button
-                                    onClick={() => renderProps.onClick?.()}
-                                    className="
-                                        w-[350px] sm:w-[433px] h-[38px] flex justify-center
-                                        items-center gap-[6px]
-                                        border-[2px] border-[#2563EB] rounded-[8px]
-                                        cursor-pointer
-                                    "
-                                    type="button"
-                                >
-                                    <img src={GoogleIcon} alt="google-icon" />
-                                    <p
-                                        className="
-                                            text-[16px] font-bold font-inter
-                                            text-[#2563EB] tracking-[0%]
-                                        "
-                                    >Continue with Google</p>
-                                </button>
-                            )}
+                            }}
+                            width={350}
+                            theme="outline"
+                            size="large"
+                            text="continue_with"
+                            shape="rectangular"
                         />
                     </div>
                     <div className="mt-[12px]">

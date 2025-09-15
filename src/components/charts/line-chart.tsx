@@ -14,7 +14,7 @@ const LineChart = ({ labels , values} : {
             chart: {
                 width:500,
                 height: 350,
-                type: 'line',
+                type: "line" as const,
                 zoom: {
                     enabled: false
                 }
@@ -23,15 +23,15 @@ const LineChart = ({ labels , values} : {
                 enabled: false
             },
             stroke: {
-                curve: 'straight'
+                curve: "straight" as "straight"
             },
             title: {
                 text: 'Expenses per Month',
-                align: 'left'
+                align: "left" as "left"
             },
             grid: {
                 row: {
-                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    colors: ['#f3f3f3', 'transparent'],
                     opacity: 0.5
                 },
             },

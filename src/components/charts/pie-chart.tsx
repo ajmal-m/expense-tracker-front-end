@@ -10,7 +10,7 @@ const PieChart = memo( ({ labels , values} : {
     options: {
       chart: {
         width: 380,
-        type: "pie",
+        type: "pie" as const,
       },
       labels: labels,
       responsive: [
