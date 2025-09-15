@@ -2,8 +2,8 @@ import { memo } from "react";
 import LogoSmall from '../../assets/LogoSmall.svg';
 import HomeIcon from '../../assets/Home.svg';
 import AddIcon from '../../assets/add.svg';
-import listIcon from '../../assets/list.svg';
-import analyticsIcon from '../../assets/analytics.png';
+// import listIcon from '../../assets/list.svg';
+// import analyticsIcon from '../../assets/analytics.png';
 import profileIcon from '../../assets/contact.png';
 import notificationIcon from '../../assets/notification.svg';
 import DefaultModal from "./model";
@@ -36,12 +36,12 @@ const Navbar = memo(() => {
                         model={(close) => (
                             <AddExpenseModel close={close} />
                         )}                />
-                <button className="cursor-pointer">
+                {/* <button className="cursor-pointer">
                     <img src={listIcon} alt="list-icon"/>
                 </button>
                  <button className="cursor-pointer">
                     <img src={analyticsIcon} alt="analytics-icon"/>
-                </button>
+                </button> */}
             </div>
 
             <div className="flex items-center gap-[24px]">
