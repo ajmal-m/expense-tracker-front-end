@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { FadeLoader } from "react-spinners";
 
 const Loader = memo(() => {
     return(
@@ -17,5 +18,14 @@ const Loader = memo(() => {
         </>
     )
 });
+
+export const RootLoader = memo(() => {
+    return(
+       <div className="h-screen flex justify-center items-center">
+        <FadeLoader color="#2563EB"/>
+       </div>
+    )
+})
+
 
 export default Loader;
