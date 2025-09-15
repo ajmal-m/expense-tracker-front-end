@@ -3,14 +3,12 @@ import AuthLayout from "../layouts/auth-layout";
 import Label from "../components/reusable/label";
 import Input from "../components/reusable/input";
 import LogoImage from '../assets/LogoSmall.svg';
-import GoogleIcon from '../assets/google_icon.svg';
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/reusable/loader";
 import axiosInstance from "../api/axios";
 import { loginSuccess } from "../slices/authSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import { GoogleLogin } from "@react-oauth/google";
 
 
 const LoginPage = memo(() => {
@@ -97,21 +95,7 @@ const LoginPage = memo(() => {
                         </span>
                     </div>
                     <div className="mt-[12px] flex justify-center">
-                        <GoogleLogin
-                            onSuccess={(credentialResponse) => {
-                                if (credentialResponse.credential) {
-                                    console.log(credentialResponse)
-                                }
-                            }}
-                            onError={() => {
-                                console.log("Login Failed");
-                            }}
-                            width={350}
-                            theme="outline"
-                            size="large"
-                            text="continue_with"
-                            shape="rectangular"
-                        />
+                        
                     </div>
                     <div className="mt-[12px]">
                         <p
