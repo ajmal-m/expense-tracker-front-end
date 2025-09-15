@@ -13,7 +13,15 @@ const AnalyticsBadges = memo(() => {
     const currency = JSON.parse(localStorage.getItem("currency") || "");
     const currencyIcon = currencies.find((curr) => curr.name === currency)?.value || "₹";
     const [expenseData, setExpenseData] = useState<any>({});
-    const [budgetAnalytics, setBudgetAnalytics] = useState([]);
+    type BudgetAnalyticsItem = {
+        status: string;
+        categoryName: string;
+        totalExpense: number;
+        budgetedAmount: number;
+        // add other properties if needed
+    };
+    
+    const [budgetAnalytics, setBudgetAnalytics] = useState<BudgetAnalyticsItem[]>([]);
 
     useEffect(() => {
         const fetchCurrentMonthExpense = async() => {

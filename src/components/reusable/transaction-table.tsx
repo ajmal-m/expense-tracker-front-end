@@ -17,7 +17,7 @@ import { removeExpenseItem } from "../../slices/expenseSlice";
 import { formatNumber } from "../../utils/helpers";
 
 const TransactionTable = memo( ({ expenses } : {
-  expenses : { amount: number; notes: string; category: string; day: string, _id: string; month:string;year:string; }[]
+  expenses : { amount: number; notes: string; category: { name: string;}; day: string, _id: string; month:string;year:string; }[]
 }) => {
 
   const dispatch = useDispatch<AppDispatch>();
